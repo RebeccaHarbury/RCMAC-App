@@ -1,0 +1,9 @@
+<div [ngClass]="{'current':currentTemp}" class="dailyForecast">
+  <p>{{place}}</p>
+  <p>{{date | date:'EEE'}}</p>
+  <span [ngClass]="{'big': bigIcon}"><img [src]="icon" class="weatherIcon"></span>
+  <p><span class="hourlyTemperature"> {{currentTemperature | number: '1.0-0'}}&deg;C </span></p>
+  <p><img [src]="up"/>{{highTemperature | number: '1.0-0'}}&deg;C</p>
+  <p><img [src]="down"/>{{lowTemperature | number: '1.0-0'}}&deg;C</p>
+</div>
+

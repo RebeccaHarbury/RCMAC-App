@@ -1,0 +1,47 @@
+.dailyForecast {
+  width: 50px;
+  p {
+    font-size: larger;
+    display:inline-flex;
+    margin-bottom: 15px;
+    img {
+      height: 18px;
+      width: 18px;
+      margin-right: 2px;
+    }
+  }
+}
+img {
+  height: 28px;
+  width: 28px;
+  margin: auto;
+}
+
+
+.weatherIcon {
+  height: 64px;
+  width: 64px;
+}
+.big {
+  .weatherIcon {
+    height: 128px;
+    width: 128px;
+  }
+}
+
+.current {
+  margin: auto;
+  font-size: 150%;
+  width: 120px;
+  p {
+    img {
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    }
+  }
+  span {
+    display: block;
+    font-size: 150%;
+  }
+}

@@ -1,13 +1,12 @@
 
-  <div>
-    <ng-container *ngFor="let location of place_data">
 
+  <div id = "forecast" class="card">
+    <ng-container *ngFor="let location of place_data; let i=index">
+      
     <weather-display-component [place]="location.name"
-                               [date]="dailyData[0].time" icon="images/weather-{{hourlyData.significantWeatherCode}}.png" alt="weather icon"
-                               [currentTemperature]= "hourlyData.screenTemperature" 
-                               up="images/up-arrow.png" alt="up arrow" [highTemperature]="dailyData[0].dayMaxScreenTemperature"
-                               down="images/down-arrow.png" alt="down arrow" [lowTemperature]="dailyData[0].nightMinScreenTemperature"></weather-display-component>
+                               [date]="dailyData[i][0].time" icon="images/weather-{{hourlyData[i].significantWeatherCode}}.png" alt="weather icon"
+                               [currentTemperature]= "hourlyData[i].screenTemperature" 
+                               up="images/up-arrow.png" alt="up arrow" [highTemperature]="dailyData[i][0].dayMaxScreenTemperature"
+                               down="images/down-arrow.png" alt="down arrow" [lowTemperature]="dailyData[i][0].nightMinScreenTemperature"></weather-display-component>
     </ng-container>
   </div>
-  
-  

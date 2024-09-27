@@ -6,12 +6,19 @@
     font-size: larger;
     display:inline-flex;
     margin-bottom: 15px;
+
+
+
     img {
       height: 16px;
       width: 18px;
       margin-right: 2px;
     }
   }
+    
+  #place {
+    font-size: 150%;
+  }  
 }
 
 img {
@@ -25,6 +32,7 @@ img {
   height: 64px;
   width: 64px;
 }
+
 .big {
   .weatherIcon {
     height: 128px;
@@ -35,14 +43,16 @@ img {
 .current {
   margin: auto;
   font-size: 150%;
-  width: 120px;
+  width: 200px;
+
   p {
     img {
-    height: 24px;
-    width: 24px;
-    margin-right: 5px;
+      height: 24px;
+      width: 24px;
+      margin-right: 5px;
     }
   }
+
   span {
     display: block;
     font-size: 150%;

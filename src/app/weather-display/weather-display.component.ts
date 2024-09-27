@@ -24,6 +24,12 @@ export class WeatherDisplayComponent {
   @Input() currentTemp = true;
   @Input() highTemperature = '';
   @Input() lowTemperature = '';
+  @Input() win = '';
+  @Input() precip = '';
+  @Input() vis = '';
+  @Input() wind = '';
+  @Input() precipitation = '';
+  @Input() visibility = '';
 
 
 }

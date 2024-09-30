@@ -16,7 +16,8 @@ export class AppService {
     getHourlyData(_lat, _lon) {
         //return this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?latitude=${_lat}&longitude=${_lon}`, {headers:this.headers}).pipe(map((value: any) => {      
         return this.httpClient.get(`./hourlyData.json`, { headers: this.headers }).pipe(map((value: any) => {
-            let localHourlyData = value.features[0].properties.timeSeries[2];
+            let localHourlyData = value.features[0].properties.timeSeries;
+            localHourlyData.shift();
             //console.log("service", localHourlyData);
             return localHourlyData;
 

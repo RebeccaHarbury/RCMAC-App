@@ -1,16 +1,17 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TestComponent } from './test/test.component';
 import { CommonModule } from '@angular/common';
 import { WeatherDisplayComponent } from './weather-display/weather-display.component';
+import { DetailDisplayComponent } from './detail-display/detail-display.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppService } from './app.service';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TestComponent, WeatherDisplayComponent, CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [RouterOutlet, DetailDisplayComponent, WeatherDisplayComponent, CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

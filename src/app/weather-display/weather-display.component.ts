@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
+import { WeatherDataComponent } from '../weather-data/weather-data.component';
 
 @Component({
   selector: 'weather-display-component',
@@ -7,7 +8,8 @@ import { CommonModule, DatePipe } from '@angular/common';
   templateUrl: './weather-display.component.html',
   imports: [
     CommonModule,
-    DatePipe
+    DatePipe,
+    WeatherDataComponent
   ],
   styleUrl: './weather-display.component.scss'
 })

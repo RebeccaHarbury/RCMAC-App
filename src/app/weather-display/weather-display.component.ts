@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { WeatherDataComponent } from '../weather-data/weather-data.component';
+import { AppService } from '../app.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'weather-display-component',
@@ -9,29 +10,42 @@ import { WeatherDataComponent } from '../weather-data/weather-data.component';
   imports: [
     CommonModule,
     DatePipe,
-    WeatherDataComponent
+    RouterLink,
   ],
   styleUrl: './weather-display.component.scss'
 })
 export class WeatherDisplayComponent {
+  locationData: any = [];
+  dailyData: any = [];
+  place_data = [
+    { name: 'Okehampton', lat: 50.7390, lon: -4.0032 },
+    { name: 'Torbay', lat: 50.4517, lon: -3.5579 },
+    { name: 'Woodbury', lat: 50.6768, lon: -3.4005 }
+  ];
+
+  service = inject(AppService)
+
   constructor() {
   }
-  @Input() place = '';
-  @Input() date = '';
-  @Input() icon = '';
-  @Input() up = '';
-  @Input() down = '';
-  @Input() bigIcon = true;
-  @Input() currentTemperature = '';
-  @Input() currentTemp = true;
-  @Input() highTemperature = '';
-  @Input() lowTemperature = '';
-  @Input() win = '';
-  @Input() precip = '';
-  @Input() vis = '';
-  @Input() wind = '';
-  @Input() precipitation = '';
-  @Input() visibility = '';
+
+
+
+  //  searchTerm= '';
+  //  place_name;
+
+  ngOnInit() {
+
+    this.locationData.push(
+      this.service.getData('Okehampton'));
+    this.locationData.push(
+      this.service.getData('Torbay'));
+    this.locationData.push(
+      this.service.getData('Woodbury'));
+    console.log('weather display on init:', this.locationData);
+
+
+
+  }
 
 
 }

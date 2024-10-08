@@ -1,16 +1,14 @@
-<div class="dailyForecast">
-    <p id="place">{{place}}</p>
-    <!--<p>{{date | date:'EEE'}}</p> -->
-    <span><img [src]="icon" class="weatherIcon"></span>
-    <p><span class="hourlyTemperature"> {{dayTemperature | number: '1.0-0'}}&deg;C </span></p>
-    <p><img [src]="win" />{{dayWind | number: '1.0-0'}}mph</p>
-    <p><img [src]="precip" />{{dayPrecipitation | number: '1.0-0'}}&percnt;</p>
-    <p><img [src]="vis" />{{dayVisibility | number: '1.0-0'}}m</p>
-  </div>
-  
 
-  
-    
-  
-  
-  
+<div class="cards">
+  <p id="place">{{specificLocationData[0].name}}</p>
+  <ng-container *ngFor="let day of specificLocationData[0].dailyData[0]; let i=index;">
+    <div id="dailyForecast" class="card">
+        <p> {{specificLocationData[0].dailyData[0][i].time | date:'EEE'}}</p>
+        <span><img src="images/weather-{{specificLocationData[0].dailyData[0][i].daySignificantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
+        <p><span class="hourlyTemperature"> {{specificLocationData[0].dailyData[0][i].dayMaxScreenTemperature | number: '1.0-0'}}&deg;C </span></p>
+        <p><img src="images/weather-31.png" alt="windy icon" />{{specificLocationData[0].dailyData[0][i].midday10MWindSpeed | number: '1.0-0'}}mph</p>
+        <p><img src="images/weather-32.png" alt="precipitation percentage icon"/>{{specificLocationData[0].dailyData[0][i].dayProbabilityOfPrecipitation | number: '1.0-0'}}&percnt;</p>
+        <p><img src="images/weather-6.png" alt="foggy icon"/>{{specificLocationData[0].dailyData[0][i].middayVisibility | number: '1.0-0'}}m</p>
+    </div>
+  </ng-container>
+</div> 

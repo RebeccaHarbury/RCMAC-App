@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { WeatherDataComponent } from '../weather-data/weather-data.component';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { AppService } from '../app.service';
+import { WeatherDisplayComponent } from '../weather-display/weather-display.component';
 
 @Component({
   selector: 'detail-display-component',
@@ -12,27 +13,32 @@ import { WeatherDataComponent } from '../weather-data/weather-data.component';
     RouterOutlet,
     CommonModule,
     DatePipe,
-    WeatherDataComponent,
+    WeatherDisplayComponent
   ],
   styleUrl: './detail-display.component.scss'
 })
-export class DetailDisplayComponent {
+export class DetailDisplayComponent implements OnInit {
+  specificLocationData: any = [];
 
-  constructor() {
+  service = inject(AppService);
+  constructor(
+    private route: ActivatedRoute,
+
+  ) {
   }
-  @Input() place = '';
-  @Input() date = '';
-  @Input() icon = '';
-  @Input() up = '';
-  @Input() down = '';
-  @Input() dayTemperature = '';
-  @Input() highTemperature = '';
-  @Input() lowTemperature = '';
-  @Input() win = '';
-  @Input() precip = '';
-  @Input() vis = '';
-  @Input() dayWind = '';
-  @Input() dayPrecipitation = '';
-  @Input() dayVisibility = '';
+
+
+  //  searchTerm= '';
+  //  place_name;
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id')!;
+
+    this.specificLocationData.push(
+      this.service.getData(id));
+    console.log('detail display on init:', this.specificLocationData);
+
+  }
+
 
 }

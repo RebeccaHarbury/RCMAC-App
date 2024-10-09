@@ -22,6 +22,7 @@ export class WeatherDisplayComponent {
     { name: 'Torbay', lat: 50.4517, lon: -3.5579 },
     { name: 'Woodbury', lat: 50.6768, lon: -3.4005 }
   ];
+  dateNow = new Date()
 
   service = inject(AppService)
 

@@ -19,7 +19,7 @@ import { AppService } from './app.service';
 
 
 export class AppComponent implements OnInit {
-  title = 'Weather App';
+  title = 'Devon RC Model Aircraft Club';
 
   //  searchTerm= '';
   //  place_name;

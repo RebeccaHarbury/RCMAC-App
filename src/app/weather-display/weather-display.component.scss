@@ -3,17 +3,17 @@
   display: grid;
   grid-template-columns: 50% 50%;
   align-items: center;
-  color: #ffffff;
+  color: rgb(18, 59, 97);
 
   #time {
     justify-self: start;
-    padding: 20px;
-    font-size: 36px;
+    padding: 7px 20px;
+    font-size: 28px;
   }
   #date {
     justify-self: end;
-    padding: 20px;
-    font-size: 36px;  
+    padding: 7px 20px;
+    font-size: 28px;  
   }
 }
 

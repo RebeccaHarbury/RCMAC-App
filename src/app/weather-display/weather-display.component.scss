@@ -1,3 +1,22 @@
+  
+.dateTimeBar {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  color: #ffffff;
+
+  #time {
+    justify-self: start;
+    padding: 20px;
+    font-size: 36px;
+  }
+  #date {
+    justify-self: end;
+    padding: 20px;
+    font-size: 36px;  
+  }
+}
+
 .cards {
   display: flex;
   padding: 20px;
@@ -7,9 +26,7 @@
   .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
-
   }
-
 
   .card {
     background: linear-gradient(135deg, rgb(144, 194, 241), rgb(28, 77, 122));
@@ -22,69 +39,48 @@
     border-radius: 20px;
     padding: 20px;
     text-align: center;
+    display: grid;
+    grid-row: repeat(7, auto);
+    place-items: center;
 
   }
 
 }
+a {
+  text-decoration: none;    
+}
+
+#dailyForecast {
+  align-self: center;
+  
+  
+  .weatherIcon {
+    height: 64px;
+    width: 64px;
+  }
 
 
-.dailyForecast {
-  display: grid;
-  width: 50px;
-
-  justify p {
-    font-size: larger;
+  p {
+    
+    font-size: x-large;
     display: inline-flex;
     margin-bottom: 15px;
 
 
+    #place {
+      font-size: 150%;
+    }
+
 
     img {
-      height: 16px;
-      width: 18px;
+      height: 32px;
+      width: 32px;
       margin-right: 2px;
     }
   }
 
-  #place {
-    font-size: 150%;
-  }
-}
 
-img {
-  height: 28px;
-  width: 28px;
-  margin: auto;
 }
 
 
-.weatherIcon {
-  height: 64px;
-  width: 64px;
-}
 
-.big {
-  .weatherIcon {
-    height: 128px;
-    width: 128px;
-  }
-}
-
-.current {
-  margin: auto;
-  font-size: 150%;
-  width: 200px;
-
-  p {
-    img {
-      height: 24px;
-      width: 24px;
-      margin-right: 5px;
-    }
-  }
-
-  span {
-    display: block;
-    font-size: 150%;
-  }
-}

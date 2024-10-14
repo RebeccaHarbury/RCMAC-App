@@ -3,7 +3,8 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { AppService } from '../app.service';
 import { WeatherDisplayComponent } from '../weather-display/weather-display.component';
-import { HourlyDetailComponent } from '../hourly-detail-display copy/hourly-detail-display.component';
+import { DailyDetailComponent } from '../daily-detail-display/daily-detail-display.component';
+import { HourlyDetailComponent } from '../hourly-detail-display/hourly-detail-display.component';
 import { Title } from '@angular/platform-browser'
 
 @Component({
@@ -16,6 +17,7 @@ import { Title } from '@angular/platform-browser'
     CommonModule,
     DatePipe,
     WeatherDisplayComponent,
+    DailyDetailComponent,
     HourlyDetailComponent
   ],
   styleUrl: './detail-display.component.scss'
@@ -28,24 +30,10 @@ export class DetailDisplayComponent implements OnInit {
     private route: ActivatedRoute,
     private titleService: Title,
 
-  ) {
-  }
-
-
-  //  searchTerm= '';
-  //  place_name;
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.titleService.setTitle(`${id}`);
-
-    this.specificLocationData.push(
-      this.service.getData(id));
-    console.log('detail display on init:', this.specificLocationData);
-
-
-
   }
-
-
 }

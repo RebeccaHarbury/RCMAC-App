@@ -29,11 +29,6 @@ export class WeatherDisplayComponent {
   constructor() {
   }
 
-
-
-  //  searchTerm= '';
-  //  place_name;
-
   ngOnInit() {
 
     this.locationData.push(
@@ -44,9 +39,5 @@ export class WeatherDisplayComponent {
       this.service.getData('Woodbury'));
     console.log('weather display on init:', this.locationData);
 
-
-
   }
-
-
 }

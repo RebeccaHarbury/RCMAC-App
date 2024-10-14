@@ -21,9 +21,6 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
   title = 'Devon RC Model Aircraft Club';
 
-  //  searchTerm= '';
-  //  place_name;
-
 
   service = inject(AppService)
 
@@ -35,27 +32,4 @@ export class AppComponent implements OnInit {
   }
 }
 
-
-/* getLocation (placeName) {
-  console.log('get location data');
-  this.httpClient.get(`https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates?f=json&searchExtent=-8,49,2,61&SingleLine=${placeName}`).subscribe((location_result:any) => {
-    console.log(location_result);
-    //obtain place name
-    const place_name_response = (location_result).candidates[1].address;
-    this.place_name = place_name_response.split(',')[0];
-    console.log(this.place_name);
-    //obtain co-ordinates
-    const location = location_result.candidates[0].location;
-    const lat = (location).y;
-    const lon = (location).x;
-    this.getData(lat, lon);
-  })
-}*/
-
-
-/*
-    clearSearchInput () {
-    this.searchTerm = '';
-  }
-*/
 

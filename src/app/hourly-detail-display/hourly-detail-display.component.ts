@@ -26,6 +26,21 @@ export class HourlyDetailComponent implements OnInit {
 
   ) {}
 
+  idealConditions(day:number, i:number) {
+    if ((this.specificLocationData[0].hourlyData[day][i].windSpeed10m) <= 9 
+    && (this.specificLocationData[0].hourlyData[day][i].probOfPrecipitation) <= 20 
+    && (this.specificLocationData[0].hourlyData[day][i].visibility) >= 9000) {
+      console.log('All true!')
+      return true;
+    } else {
+      return false;
+    }
+
+    //this.locationData[i].hourlyData[0][2].windGustSpeed10m
+
+  }
+
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
 

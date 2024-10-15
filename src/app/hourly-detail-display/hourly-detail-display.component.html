@@ -4,7 +4,7 @@
 <p id="day">Today</p>
 <div class="scroll" appHorizonalScroll>
 <ng-container *ngFor="let hour of specificLocationData[0].hourlyData[0]; let i=index;">
-    <div class="hourly">
+    <div [ngClass]="{'idealHour': idealConditions(0, i)}" class="hourly">
         <p> {{specificLocationData[0].hourlyData[0][i].time | date:'HH:mm'}} </p>
         <span><img src="images/weather-{{specificLocationData[0].hourlyData[0][i].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
         <p><span class="hourlyTemperature"> {{specificLocationData[0].hourlyData[0][i].screenTemperature | number: '1.0-0'}}&deg;C </span></p>
@@ -21,7 +21,7 @@
     <p id="day"> {{specificLocationData[0].hourlyData[1][0].time | date:'EEEE'}} </p>
     <div class="scroll" appHorizonalScroll>
 <ng-container *ngFor="let hour of specificLocationData[0].hourlyData[1]; let i=index;">
-    <div class="hourly">
+    <div [ngClass]="{'idealHour': idealConditions(1, i)}" class="hourly">
         <p id="left"> {{specificLocationData[0].hourlyData[1][i].time | date:'HH:mm'}} </p>
         <span><img src="images/weather-{{specificLocationData[0].hourlyData[1][i].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
         <p><span class="hourlyTemperature"> {{specificLocationData[0].hourlyData[1][i].screenTemperature | number: '1.0-0'}}&deg;C </span></p>

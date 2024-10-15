@@ -24,6 +24,20 @@ export class DailyDetailComponent implements OnInit {
 
   ) {}
 
+  idealConditions(i:number) {
+    if ((this.specificLocationData[0].dailyData[0][i].midday10MWindSpeed) <= 9 
+    && (this.specificLocationData[0].dailyData[0][i].dayProbabilityOfPrecipitation) <= 20 
+    && (this.specificLocationData[0].dailyData[0][i].middayVisibility) >= 9000) {
+      console.log('All true!')
+      return true;
+    } else {
+      return false;
+    }
+
+    //this.locationData[i].hourlyData[0][2].windGustSpeed10m
+
+  }
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
 

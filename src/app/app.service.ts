@@ -33,49 +33,49 @@ export class AppService {
 
     loadHourlyData() {
 
-        this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?latitude=${this.okehampton_.lat}&longitude=${this.okehampton_.lon}`, { headers: this.headers }).subscribe((result: any) => {
-        //this.httpClient.get(`./hourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
+        //this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?latitude=${this.okehampton_.lat}&longitude=${this.okehampton_.lon}`, { headers: this.headers }).subscribe((result: any) => {
+        this.httpClient.get(`./hourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localHourlyData = result.features[0].properties.timeSeries
             const date = new Date()
             const dateToday = date.toISOString().split('T')[0];
             const dateTomorrow = this.addDays(date, 1).toISOString().split('T')[0];
             console.log(dateToday, dateTomorrow);
-            const todayOkehampton = localHourlyData.filter((hour:any) => hour.time.includes(dateToday));
-            const tomorOkehampton = localHourlyData.filter((hour:any) => hour.time.includes(dateTomorrow));            
-            //const todayOkehampton = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-27'));
-            //const tomorOkehampton = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-28'));
+            //const todayOkehampton = localHourlyData.filter((hour:any) => hour.time.includes(dateToday));
+            //const tomorOkehampton = localHourlyData.filter((hour:any) => hour.time.includes(dateTomorrow));            
+            const todayOkehampton = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-27'));
+            const tomorOkehampton = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-28'));
 
             this.okehampton_.hourlyData.splice(0, 1, todayOkehampton, tomorOkehampton);
             //console.log("service1", localHourlyData);
         })
 
-        this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?latitude=${this.torbay_.lat}&longitude=${this.torbay_.lon}`, { headers: this.headers }).subscribe((result: any) => {
-        //this.httpClient.get(`./hourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
+        //this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?latitude=${this.torbay_.lat}&longitude=${this.torbay_.lon}`, { headers: this.headers }).subscribe((result: any) => {
+        this.httpClient.get(`./spareHourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localHourlyData = result.features[0].properties.timeSeries
             const date = new Date()
             const dateToday = date.toISOString().split('T')[0];
             const dateTomorrow = this.addDays(date, 1).toISOString().split('T')[0];
             console.log(dateToday, dateTomorrow);
-            const todayTorbay = localHourlyData.filter((hour:any) => hour.time.includes(dateToday));
-            const tomorTorbay = localHourlyData.filter((hour:any) => hour.time.includes(dateTomorrow));            
-            //const todayTorbay = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-27'));
-            //const tomorTorbay = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-28'));
+            //const todayTorbay = localHourlyData.filter((hour:any) => hour.time.includes(dateToday));
+            //const tomorTorbay = localHourlyData.filter((hour:any) => hour.time.includes(dateTomorrow));            
+            const todayTorbay = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-27'));
+            const tomorTorbay = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-28'));
 
             this.torbay_.hourlyData.splice(0, 1, todayTorbay, tomorTorbay);
             //console.log("service2", localHourlyData);
         })
 
-        this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?latitude=${this.woodbury_.lat}&longitude=${this.woodbury_.lon}`, { headers: this.headers }).subscribe((result: any) => {
-        //this.httpClient.get(`./hourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
+        //this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?latitude=${this.woodbury_.lat}&longitude=${this.woodbury_.lon}`, { headers: this.headers }).subscribe((result: any) => {
+        this.httpClient.get(`./hourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localHourlyData = result.features[0].properties.timeSeries
             const date = new Date()
             const dateToday = date.toISOString().split('T')[0];
             const dateTomorrow = this.addDays(date, 1).toISOString().split('T')[0];
             console.log(dateToday, dateTomorrow);
-            const todayWoodbury = localHourlyData.filter((hour:any) => hour.time.includes(dateToday));
-            const tomorWoodbury = localHourlyData.filter((hour:any) => hour.time.includes(dateTomorrow));            
-            //const todayWoodbury = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-27'));
-            //const tomorWoodbury = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-28'));
+            //const todayWoodbury = localHourlyData.filter((hour:any) => hour.time.includes(dateToday));
+            //const tomorWoodbury = localHourlyData.filter((hour:any) => hour.time.includes(dateTomorrow));            
+            const todayWoodbury = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-27'));
+            const tomorWoodbury = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-28'));
 
             this.woodbury_.hourlyData.splice(0, 1, todayWoodbury, tomorWoodbury);
             //console.log("service3", localHourlyData);
@@ -85,22 +85,22 @@ export class AppService {
 
 
     loadDailyData() {
-        this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?latitude=${this.okehampton_.lat}&longitude=${this.okehampton_.lon}`, { headers: this.headers }).subscribe((result: any) => {
-        //this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
+        //this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?latitude=${this.okehampton_.lat}&longitude=${this.okehampton_.lon}`, { headers: this.headers }).subscribe((result: any) => {
+        this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
             localDailyData.splice(0, 2);
             this.okehampton_.dailyData.splice(0, 1, localDailyData);
             //console.log("service4", localDailyData);
         })
-        this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?latitude=${this.torbay_.lat}&longitude=${this.torbay_.lon}`, { headers: this.headers }).subscribe((result: any) => {
-        //this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
+        //this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?latitude=${this.torbay_.lat}&longitude=${this.torbay_.lon}`, { headers: this.headers }).subscribe((result: any) => {
+        this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
             localDailyData.splice(0, 2);
             this.torbay_.dailyData.splice(0, 1, localDailyData);
             //console.log("service5", localDailyData);
         })
-        this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?latitude=${this.woodbury_.lat}&longitude=${this.woodbury_.lon}`, { headers: this.headers }).subscribe((result: any) => {
-        //this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
+        //this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?latitude=${this.woodbury_.lat}&longitude=${this.woodbury_.lon}`, { headers: this.headers }).subscribe((result: any) => {
+        this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
             localDailyData.splice(0, 2);
             this.woodbury_.dailyData.splice(0, 1, localDailyData);

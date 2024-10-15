@@ -2,7 +2,6 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { AppService } from '../app.service';
-import { HorizontalScrollDirective } from '../horizontal-scroll.directive';
 
 @Component({
   selector: 'hourly-detail-display',
@@ -13,7 +12,6 @@ import { HorizontalScrollDirective } from '../horizontal-scroll.directive';
     RouterOutlet,
     CommonModule,
     DatePipe,
-    HorizontalScrollDirective
   ],
   styleUrl: './hourly-detail-display.component.scss'
 })

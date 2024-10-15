@@ -2,7 +2,7 @@
 
 <div class="hourCards" >
 <p id="day">Today</p>
-<div class="scroll" appHorizonalScroll>
+<div class="scroll">
 <ng-container *ngFor="let hour of specificLocationData[0].hourlyData[0]; let i=index;">
     <div [ngClass]="{'idealHour': idealConditions(0, i)}" class="hourly">
         <p> {{specificLocationData[0].hourlyData[0][i].time | date:'HH:mm'}} </p>
@@ -19,7 +19,7 @@
 
 <div class="hourCards">
     <p id="day"> {{specificLocationData[0].hourlyData[1][0].time | date:'EEEE'}} </p>
-    <div class="scroll" appHorizonalScroll>
+    <div class="scroll">
 <ng-container *ngFor="let hour of specificLocationData[0].hourlyData[1]; let i=index;">
     <div [ngClass]="{'idealHour': idealConditions(1, i)}" class="hourly">
         <p id="left"> {{specificLocationData[0].hourlyData[1][i].time | date:'HH:mm'}} </p>

@@ -1,7 +1,8 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { AppService } from '../app.service';
 import { RouterLink } from '@angular/router';
+import { DateTime } from 'luxon';
 
 @Component({
   selector: 'weather-display-component',
@@ -22,7 +23,7 @@ export class WeatherDisplayComponent {
     { name: 'Torbay', lat: 50.4517, lon: -3.5579 },
     { name: 'Woodbury', lat: 50.6768, lon: -3.4005 }
   ];
-  dateNow = new Date()
+  dateNow = DateTime.local().toISO();
 
   service = inject(AppService)
 

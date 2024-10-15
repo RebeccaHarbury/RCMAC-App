@@ -14,9 +14,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'RC Model Aircraft Club - Weather' title`, () => {
+  it(`should have the 'Devon RC Model Aircraft Club' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Devon Model Aircraft Club - Weather');
+    expect(app.title).toEqual('Devon RC Model Aircraft Club');
   });
 });

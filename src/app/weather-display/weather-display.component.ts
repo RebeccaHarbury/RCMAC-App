@@ -29,6 +29,25 @@ export class WeatherDisplayComponent {
   constructor() {
   }
 
+
+
+  idealConditions(i:number) {
+    if ((this.locationData[i].hourlyData[0][2].windSpeed10m) <= 9 
+    && (this.locationData[i].hourlyData[0][2].probOfPrecipitation) <= 20 
+    && (this.locationData[i].hourlyData[0][2].visibility) >= 9000) {
+      console.log('All true!')
+      return true;
+    } else {
+      return false;
+    }
+
+    //this.locationData[i].hourlyData[0][2].windGustSpeed10m
+
+  }
+
+
+
+
   ngOnInit() {
 
     this.locationData.push(
@@ -37,7 +56,7 @@ export class WeatherDisplayComponent {
       this.service.getData('Torbay'));
     this.locationData.push(
       this.service.getData('Woodbury'));
-    console.log('weather display on init:', this.locationData);
+    console.log('weather display on init:', this.locationData);    
 
   }
 }

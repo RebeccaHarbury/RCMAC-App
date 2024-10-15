@@ -88,21 +88,21 @@ export class AppService {
         this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?latitude=${this.okehampton_.lat}&longitude=${this.okehampton_.lon}`, { headers: this.headers }).subscribe((result: any) => {
         //this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
-            localDailyData.splice(0, 2);
+            localDailyData.splice(0, 3);
             this.okehampton_.dailyData.splice(0, 1, localDailyData);
             //console.log("service4", localDailyData);
         })
         this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?latitude=${this.torbay_.lat}&longitude=${this.torbay_.lon}`, { headers: this.headers }).subscribe((result: any) => {
         //this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
-            localDailyData.splice(0, 2);
+            localDailyData.splice(0, 3);
             this.torbay_.dailyData.splice(0, 1, localDailyData);
             //console.log("service5", localDailyData);
         })
         this.httpClient.get(`https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?latitude=${this.woodbury_.lat}&longitude=${this.woodbury_.lon}`, { headers: this.headers }).subscribe((result: any) => {
         //this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
-            localDailyData.splice(0, 2);
+            localDailyData.splice(0, 3);
             this.woodbury_.dailyData.splice(0, 1, localDailyData);
             //console.log("service6", localDailyData);
         })

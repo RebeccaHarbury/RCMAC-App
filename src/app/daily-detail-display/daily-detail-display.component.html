@@ -1,7 +1,7 @@
 <div class="cards">
 
   <ng-container *ngFor="let day of specificLocationData[0].dailyData[0]; let i=index;">
-    <div id="dailyForecast" class="dailyCard">
+    <div id="dailyForecast" [ngClass]="{'ideal': idealConditions(i)}" class="dailyCard">
         <p id="left"> {{specificLocationData[0].dailyData[0][i].time | date:'EEEE'}} </p>
         <span id="center"><img src="images/weather-{{specificLocationData[0].dailyData[0][i].daySignificantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
         <p id="right"><img src="images/up-arrow.png" alt="up arrow" id="arrow"/></p>

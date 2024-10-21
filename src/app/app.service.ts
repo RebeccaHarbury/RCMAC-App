@@ -143,7 +143,6 @@ export class AppService {
         })}
     }
 
-
     getData(place_name: any) {
         if (place_name === this.okehamptonData.name) {
             return this.okehamptonData;
@@ -156,7 +155,6 @@ export class AppService {
         }
         else return console.log('place name not valid');
     }
-
 
     conditionHighlight(wind:number, precip:number, vis:number) {
     if (wind <= 9 

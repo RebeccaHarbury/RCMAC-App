@@ -145,13 +145,13 @@ export class AppService {
 
 
     getData(place_name: any) {
-        if (place_name == this.okehamptonData.name) {
+        if (place_name === this.okehamptonData.name) {
             return this.okehamptonData;
         }
-        else if (place_name == this.torbayData.name) {
+        else if (place_name === this.torbayData.name) {
             return this.torbayData;
         }
-        else if (place_name == this.woodburyData.name) {
+        else if (place_name === this.woodburyData.name) {
             return this.woodburyData;
         }
         else return console.log('place name not valid');

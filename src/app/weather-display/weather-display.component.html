@@ -1,5 +1,5 @@
 <div class="dateTimeBar">
-<span class="time">{{dateNow | date:'h:mm a'}}</span><span class="date">{{locationData[0].hourlyData[0][0].time | date:'EEEE d MMMM y'}}</span>
+<span class="time">{{dateNow | date:'h:mm a'}}</span><span class="date">{{dateNow | date:'EEEE d MMMM y'}}</span>
 </div>
 <div class="cards">
   <ng-container *ngFor="let location of locationData; let i=index;">

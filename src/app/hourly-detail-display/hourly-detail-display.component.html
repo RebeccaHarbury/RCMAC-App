@@ -1,37 +1,37 @@
-<div id="place">{{specificLocationData[0].name}}</div>
+<div class="place">{{specificLocationData[0].name}}</div>
 
 <div class="hourCards" >
-<p id="day">Today</p>
-<div class="scroll" appHorizonalScroll>
-<ng-container *ngFor="let hour of specificLocationData[0].hourlyData[0]; let i=index;">
-    <div [ngClass]="{'idealHour': idealConditions(0, i)}" class="hourly">
-        <p> {{specificLocationData[0].hourlyData[0][i].time | date:'HH:mm'}} </p>
-        <span><img src="images/weather-{{specificLocationData[0].hourlyData[0][i].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
-        <p><span class="hourlyTemperature"> {{specificLocationData[0].hourlyData[0][i].screenTemperature | number: '1.0-0'}}&deg;C </span></p>
-        <p id="center"><img src="images/weather-33.png" alt="windy icon" />{{specificLocationData[0].hourlyData[0][i].windSpeed10m | number: '1.0-0'}}mph</p>
-        <p id="center"><img src="images/weather-31.png" alt="gust icon" />{{specificLocationData[0].hourlyData[0][i].windGustSpeed10m | number: '1.0-0'}}mph</p>        
-        <p id="center"><img src="images/weather-32.png" alt="precipitation percentage icon"/>{{specificLocationData[0].hourlyData[0][i].probOfPrecipitation | number: '1.0-0'}}&percnt;</p>
-        <p id="center"><img src="images/weather-6.png" alt="foggy icon"/>{{specificLocationData[0].hourlyData[0][i].visibility | number: '1.0-0'}}m</p>
+    <p class="day">Today</p>
+    <div class="scroll">
+        <ng-container *ngFor="let hour of specificLocationData[0].hourlyData[0]; let i=index;">
+            <div class="hourly" [ngClass]="{'idealHour': idealConditions(specificLocationData[0].hourlyData[0][i])}">
+                <p> {{specificLocationData[0].hourlyData[0][i].time | date:'HH:mm'}} </p>
+                <span><img src="images/weather-{{specificLocationData[0].hourlyData[0][i].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
+                <p><span class="hourlyTemperature"> {{specificLocationData[0].hourlyData[0][i].screenTemperature | number: '1.0-0'}}&deg;C </span></p>
+                <p><img src="images/weather-33.png" alt="windy icon" />{{specificLocationData[0].hourlyData[0][i].windSpeed10m | number: '1.0-0'}}mph</p>
+                <p><img src="images/weather-31.png" alt="gust icon" />{{specificLocationData[0].hourlyData[0][i].windGustSpeed10m | number: '1.0-0'}}mph</p>        
+                <p><img src="images/weather-32.png" alt="precipitation percentage icon"/>{{specificLocationData[0].hourlyData[0][i].probOfPrecipitation | number: '1.0-0'}}&percnt;</p>
+                <p><img src="images/weather-6.png" alt="foggy icon"/>{{specificLocationData[0].hourlyData[0][i].visibility | number: '1.0-0'}}m</p>
+            </div>
+        </ng-container>
     </div>
-</ng-container>
-</div>
 </div>
 
 <div class="hourCards">
-    <p id="day"> {{specificLocationData[0].hourlyData[1][0].time | date:'EEEE'}} </p>
-    <div class="scroll" appHorizonalScroll>
-<ng-container *ngFor="let hour of specificLocationData[0].hourlyData[1]; let i=index;">
-    <div [ngClass]="{'idealHour': idealConditions(1, i)}" class="hourly">
-        <p id="left"> {{specificLocationData[0].hourlyData[1][i].time | date:'HH:mm'}} </p>
-        <span><img src="images/weather-{{specificLocationData[0].hourlyData[1][i].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
-        <p><span class="hourlyTemperature"> {{specificLocationData[0].hourlyData[1][i].screenTemperature | number: '1.0-0'}}&deg;C </span></p>
-        <p><img src="images/weather-33.png" alt="windy icon" />{{specificLocationData[0].hourlyData[1][i].windSpeed10m | number: '1.0-0'}}mph</p>
-        <p><img src="images/weather-31.png" alt="gust icon" />{{specificLocationData[0].hourlyData[1][i].windGustSpeed10m | number: '1.0-0'}}mph</p>        
-        <p><img src="images/weather-32.png" alt="precipitation percentage icon"/>{{specificLocationData[0].hourlyData[1][i].probOfPrecipitation | number: '1.0-0'}}&percnt;</p>
-        <p><img src="images/weather-6.png" alt="foggy icon"/>{{specificLocationData[0].hourlyData[1][i].visibility | number: '1.0-0'}}m</p>
-    </div>        
-</ng-container>
-</div>
+    <p class="day"> {{specificLocationData[0].hourlyData[1][0].time | date:'EEEE'}} </p>
+    <div class="scroll">
+        <ng-container *ngFor="let hour of specificLocationData[0].hourlyData[1]; let i=index;">
+            <div class="hourly" [ngClass]="{'idealHour': idealConditions(specificLocationData[0].hourlyData[1][i])}">
+                <p> {{specificLocationData[0].hourlyData[1][i].time | date:'HH:mm'}} </p>
+                <span><img src="images/weather-{{specificLocationData[0].hourlyData[1][i].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
+                <p><span class="hourlyTemperature"> {{specificLocationData[0].hourlyData[1][i].screenTemperature | number: '1.0-0'}}&deg;C </span></p>
+                <p><img src="images/weather-33.png" alt="windy icon" />{{specificLocationData[0].hourlyData[1][i].windSpeed10m | number: '1.0-0'}}mph</p>
+                <p><img src="images/weather-31.png" alt="gust icon" />{{specificLocationData[0].hourlyData[1][i].windGustSpeed10m | number: '1.0-0'}}mph</p>        
+                <p><img src="images/weather-32.png" alt="precipitation percentage icon"/>{{specificLocationData[0].hourlyData[1][i].probOfPrecipitation | number: '1.0-0'}}&percnt;</p>
+                <p><img src="images/weather-6.png" alt="foggy icon"/>{{specificLocationData[0].hourlyData[1][i].visibility | number: '1.0-0'}}m</p>
+            </div>        
+        </ng-container>
+    </div>
 </div>
 
 

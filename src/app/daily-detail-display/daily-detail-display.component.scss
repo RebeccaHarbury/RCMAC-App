@@ -18,15 +18,17 @@
     border-radius: 20px;
     padding: 20px;
 
-    #left {
+    .left {
       justify-self: start;
       align-self: center;
     }
-    #right {
+
+    .right {
       justify-self: end;
       align-self: center;
     }
-    #center {
+
+    .center {
       place-self: center;
     }
 
@@ -38,11 +40,13 @@
         width: 42px;
         margin-right: 3px;
       }
-      #arrow {
+
+      .arrow {
         height: 20px;
         width:20px;
       }
     }
+    
     span {
       .weatherIcon{
         height: 64px;

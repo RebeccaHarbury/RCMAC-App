@@ -1,5 +1,4 @@
-
-#place {
+.place {
   display: flex;
   padding: 20px 30px 0px;
   margin: auto;
@@ -21,7 +20,7 @@
   margin: 15px auto 0px;
   padding: 20px;
 
-  #day {
+  .day {
     display:block;
     font-size: x-large;
     align-self: center;
@@ -50,13 +49,6 @@
       align-items: center;
       margin: auto;
       font-size: x-large;
-      
-      #center {
-        place-self: center;
-        text {
-          align-self: center;
-        }
-      }
 
       img {
         height: 42px;
@@ -73,6 +65,7 @@
       }
     }
   }
+
   .idealHour {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
@@ -86,7 +79,6 @@
     min-width: 205px;
     margin: 10px;
   }
-
 }
 
 

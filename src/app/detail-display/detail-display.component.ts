@@ -22,14 +22,15 @@ import { Title } from '@angular/platform-browser'
   ],
   styleUrl: './detail-display.component.scss'
 })
+
 export class DetailDisplayComponent implements OnInit {
   specificLocationData: any = [];
 
   service = inject(AppService);
+
   constructor(
     private route: ActivatedRoute,
     private titleService: Title,
-
   ) {}
 
   ngOnInit(): void {

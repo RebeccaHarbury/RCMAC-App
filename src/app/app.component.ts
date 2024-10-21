@@ -6,8 +6,6 @@ import { DetailDisplayComponent } from './detail-display/detail-display.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppService } from './app.service';
 
-
-
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -16,14 +14,10 @@ import { AppService } from './app.service';
   styleUrl: './app.component.scss'
 })
 
-
-
 export class AppComponent implements OnInit {
   title = 'Devon RC Model Aircraft Club';
 
-
   service = inject(AppService)
-
 
   ngOnInit() {
     this.service.loadHourlyData();

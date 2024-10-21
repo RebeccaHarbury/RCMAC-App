@@ -5,19 +5,18 @@
   align-items: center;
   color: rgb(18, 59, 97);
 
-  #time {
+  .time {
     justify-self: start;
     padding: 7px 20px;
     font-size: 28px;
   }
-  #date {
+
+  .date {
     justify-self: end;
     padding: 7px 20px;
     font-size: 28px;  
   }
 }
-
-
 
 .cards {
   display: flex;
@@ -35,7 +34,6 @@
     outline: solid rgb(50, 58, 70);
     flex: 1;
     width: 80%;
-    
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     color: #ffffff;
@@ -49,7 +47,7 @@
     align-self: center;
     max-width: 40%;
 
-    #place {
+    .place {
       font-size: xx-large;
     }
 
@@ -59,14 +57,9 @@
     }
   
     p {
-      
       font-size: x-large;
       display: inline-flex;
       margin-bottom: 15px;
-  
-      #place {
-        font-size: 150%;
-      }
   
       img {
         height: 32px;
@@ -75,6 +68,7 @@
       }
     }
   }
+  
   .ideal {
     background: linear-gradient(135deg, rgb(144, 194, 241), rgb(28, 77, 122));
     outline: solid rgb(178, 218, 241);
@@ -92,10 +86,7 @@
     place-items: center;
     align-self: center;
   }
-
 }
-
-
 
 a {
   text-decoration: none;    

@@ -15,6 +15,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './weather-display.component.scss'
 })
 export class WeatherDisplayComponent {
+  dateNow = new Date()
   locationData: any = [];
   dailyData: any = [];
   place_data = [
@@ -22,34 +23,19 @@ export class WeatherDisplayComponent {
     { name: 'Torbay', lat: 50.4517, lon: -3.5579 },
     { name: 'Woodbury', lat: 50.6768, lon: -3.4005 }
   ];
-  dateNow = new Date()
 
   service = inject(AppService)
 
-  constructor() {
+  constructor() {}
+
+  idealConditions(data:any) {
+    const wind = data.windSpeed10m;
+    const precip = data.probOfPrecipitation;
+    const vis = data.visibility;
+    return this.service.conditionHighlight(wind, precip, vis);
   }
-
-
-
-  idealConditions(i:number) {
-    if ((this.locationData[i].hourlyData[0][2].windSpeed10m) <= 9 
-    && (this.locationData[i].hourlyData[0][2].probOfPrecipitation) <= 20 
-    && (this.locationData[i].hourlyData[0][2].visibility) >= 9000) {
-      console.log('All true!')
-      return true;
-    } else {
-      return false;
-    }
-
-    //this.locationData[i].hourlyData[0][2].windGustSpeed10m
-
-  }
-
-
-
 
   ngOnInit() {
-
     this.locationData.push(
       this.service.getData('Okehampton'));
     this.locationData.push(
@@ -57,6 +43,5 @@ export class WeatherDisplayComponent {
     this.locationData.push(
       this.service.getData('Woodbury'));
     console.log('weather display on init:', this.locationData);    
-
   }
 }

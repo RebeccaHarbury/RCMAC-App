@@ -24,6 +24,7 @@ export class WeatherDisplayComponent {
     { name: 'Torbay', lat: 50.4517, lon: -3.5579 },
     { name: 'Woodbury', lat: 50.6768, lon: -3.4005 }
   ];
+  fav_img = ''
   
 
   service = inject(AppService)
@@ -35,6 +36,31 @@ export class WeatherDisplayComponent {
     const precip = data.probOfPrecipitation;
     const vis = data.visibility;
     return this.service.conditionHighlight(wind, precip, vis);
+  }
+
+  favourite(event:Event, location:string) {
+    event.stopImmediatePropagation()
+    let favourite_location = localStorage.getItem('favourite');
+    if (location !== favourite_location) {
+      localStorage.setItem('favourite', location);
+    }
+    else {
+      localStorage.removeItem('favourite')
+    }
+    favourite_location = localStorage.getItem('favourite');
+    console.log(favourite_location);
+  }
+
+  isFavourite(location:string) {
+    let favourite_location = localStorage.getItem('favourite');
+    if (location === favourite_location) {
+      this.fav_img = 'images/star-filled.png'
+      return true
+    }
+    else {
+      this.fav_img = 'images/star-empty.png'
+      return false
+    }
   }
 
   ngOnInit() {

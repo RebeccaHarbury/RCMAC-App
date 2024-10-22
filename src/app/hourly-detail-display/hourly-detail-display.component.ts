@@ -21,15 +21,19 @@ export class HourlyDetailComponent implements OnInit {
   service = inject(AppService);
   constructor(
     private route: ActivatedRoute,
-
   ) {}
+
+  idealConditions(data:any) {
+    const wind = data.windSpeed10m;
+    const precip = data.probOfPrecipitation;
+    const vis = data.visibility;
+    return this.service.conditionHighlight(wind, precip, vis);
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
-
     this.specificLocationData.push(
       this.service.getData(id));
     console.log('hourly display on init:', this.specificLocationData);
-
   }
 }

@@ -1,10 +1,10 @@
 <div class="dateTimeBar">
-<span id="time">{{dateNow | date:'h:mm a'}}</span><span id="date">{{dateNow | date:'EEEE d MMMM y'}}</span>
+<span class="time">{{dateNow | date:'h:mm a'}}</span><span class="date">{{dateNow | date:'EEEE d MMMM y'}}</span>
 </div>
 <div class="cards">
   <ng-container *ngFor="let location of locationData; let i=index;">
-    <a [routerLink]="[location.name]" id="dailyForecast" class="card">
-        <p id="place">{{location.name}}</p>
+    <a [ngClass]="{'ideal': idealConditions(locationData[i].hourlyData[0][2])}" class="card" [routerLink]="[location.name]">
+        <p class="place">{{location.name}}</p>
         <span><img src="images/weather-{{locationData[i].hourlyData[0][2].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
         <p class="hourlyTemperature"> {{locationData[i].hourlyData[0][2].screenTemperature | number: '1.0-0'}}&deg;C</p>
         <p><img src="images/weather-33.png" alt="windy icon" />{{locationData[i].hourlyData[0][2].windSpeed10m | number: '1.0-0'}}mph</p>

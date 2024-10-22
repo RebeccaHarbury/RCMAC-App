@@ -1,0 +1,13 @@
+
+<button id="fav_btn" (click)="toggleSelected();">
+    
+    <div *ngIf="selected">
+        <img src={{fav_img}} alt="">
+    </div>
+    <div *ngIf="!selected">
+        <img src={{non_fav_img}} alt="">
+    </div>
+
+</button>
+
+  

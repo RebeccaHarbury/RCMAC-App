@@ -16,6 +16,7 @@ import { DateTime } from 'luxon';
   styleUrl: './weather-display.component.scss'
 })
 export class WeatherDisplayComponent {
+  dateNow = DateTime.local().toISO();
   locationData: any = [];
   dailyData: any = [];
   place_data = [
@@ -23,22 +24,26 @@ export class WeatherDisplayComponent {
     { name: 'Torbay', lat: 50.4517, lon: -3.5579 },
     { name: 'Woodbury', lat: 50.6768, lon: -3.4005 }
   ];
-  dateNow = DateTime.local().toISO();
+  
 
   service = inject(AppService)
 
-  constructor() {
+  constructor() {}
+
+  idealConditions(data:any) {
+    const wind = data.windSpeed10m;
+    const precip = data.probOfPrecipitation;
+    const vis = data.visibility;
+    return this.service.conditionHighlight(wind, precip, vis);
   }
 
   ngOnInit() {
+    this.locationData.push(this.service.getData('Okehampton'));
 
-    this.locationData.push(
-      this.service.getData('Okehampton'));
-    this.locationData.push(
-      this.service.getData('Torbay'));
-    this.locationData.push(
-      this.service.getData('Woodbury'));
-    console.log('weather display on init:', this.locationData);
+    this.locationData.push(this.service.getData('Torbay'));
 
+    this.locationData.push(this.service.getData('Woodbury'));
+    
+    console.log('weather display on init:', this.locationData);    
   }
 }

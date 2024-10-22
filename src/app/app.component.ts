@@ -17,12 +17,12 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
   title = 'Devon RC Model Aircraft Club';
 
-  service = inject(AppService)
+  service = inject(AppService);
 
   ngOnInit() {
     this.service.loadHourlyData();
     this.service.loadDailyData();
-    console.log('app component on init')
+    console.log('app component on init');
   }
 }
 

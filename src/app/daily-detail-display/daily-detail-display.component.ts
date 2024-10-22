@@ -24,9 +24,9 @@ export class DailyDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-  ) {}
+  ) { }
 
-  idealConditions(data:any) {
+  idealConditions(data: any) {
     const wind = data.midday10MWindSpeed;
     const precip = data.dayProbabilityOfPrecipitation;
     const vis = data.middayVisibility;

@@ -19,11 +19,12 @@ export class HourlyDetailComponent implements OnInit {
   specificLocationData: any = [];
 
   service = inject(AppService);
+
   constructor(
     private route: ActivatedRoute,
-  ) {}
+  ) { }
 
-  idealConditions(data:any) {
+  idealConditions(data: any) {
     const wind = data.windSpeed10m;
     const precip = data.probOfPrecipitation;
     const vis = data.visibility;

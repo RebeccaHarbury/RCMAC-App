@@ -38,12 +38,12 @@ export class WeatherDisplayComponent {
   }
 
   ngOnInit() {
-    this.locationData.push(
-      this.service.getData('Okehampton'));
-    this.locationData.push(
-      this.service.getData('Torbay'));
-    this.locationData.push(
-      this.service.getData('Woodbury'));
+    this.locationData.push(this.service.getData('Okehampton'));
+
+    this.locationData.push(this.service.getData('Torbay'));
+
+    this.locationData.push(this.service.getData('Woodbury'));
+    
     console.log('weather display on init:', this.locationData);    
   }
 }

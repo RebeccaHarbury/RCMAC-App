@@ -6,11 +6,12 @@ import { DateTime } from 'luxon';
     providedIn: 'root'
 })
 export class AppService {
-    //hourly data http call
-    httpHourly = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?'
 
-    //daily data http call
-    httpDaily = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?'
+    //switch between local and remote data
+    localData = true
+
+    httpHourly = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?' //hourly data http call
+    httpDaily = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?' //daily data http call
 
     dateToday = DateTime.local().toISODate();
     dateTomorrow = DateTime.local().plus({days: 1}).toISODate();    
@@ -39,8 +40,9 @@ export class AppService {
         hourlyData: <any>[], 
         dailyData: <any>[] };
 
-    //switch between local and remote data
-    localData = true
+    windCond = 9
+    precipCond = 20
+    visCond = 9000
 
     headers;
 
@@ -52,49 +54,49 @@ export class AppService {
     loadHourlyData() {
         //Okehampton hourly data
         if (this.localData == false) {
-        this.httpClient.get(`${this.httpHourly}latitude=${this.okehamptonData.lat}&longitude=${this.okehamptonData.lon}`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`${this.httpHourly}latitude=${this.okehamptonData.lat}&longitude=${this.okehamptonData.lon}`, { headers: this.headers }).subscribe((result: any) => {
             let localHourlyData = result.features[0].properties.timeSeries
-            const todayOkehampton = localHourlyData.filter((hour:any) => hour.time.includes(this.dateToday));
-            const tomorOkehampton = localHourlyData.filter((hour:any) => hour.time.includes(this.dateTomorrow));
+            const todayOkehampton = this.filterHourly(localHourlyData, this.dateToday);
+            const tomorOkehampton = this.filterHourly(localHourlyData, this.dateTomorrow);
             this.okehamptonData.hourlyData.splice(0, 1, todayOkehampton, tomorOkehampton);
         })}
         else {
-        this.httpClient.get(`./hourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`./hourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localHourlyData = result.features[0].properties.timeSeries
-            const todayOkehampton = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-27'));
-            const tomorOkehampton = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-28'));
+            const todayOkehampton = this.filterHourly(localHourlyData,'2024-09-27');
+            const tomorOkehampton = this.filterHourly(localHourlyData,'2024-09-28');
             this.okehamptonData.hourlyData.splice(0, 1, todayOkehampton, tomorOkehampton);
         })}
 
         //Torbay hourly data
         if (this.localData == false) {
-        this.httpClient.get(`${this.httpHourly}latitude=${this.torbayData.lat}&longitude=${this.torbayData.lon}`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`${this.httpHourly}latitude=${this.torbayData.lat}&longitude=${this.torbayData.lon}`, { headers: this.headers }).subscribe((result: any) => {
             let localHourlyData = result.features[0].properties.timeSeries
-            const todayTorbay = localHourlyData.filter((hour:any) => hour.time.includes(this.dateToday));
-            const tomorTorbay = localHourlyData.filter((hour:any) => hour.time.includes(this.dateTomorrow));
+            const todayTorbay = this.filterHourly(localHourlyData, this.dateToday);
+            const tomorTorbay = this.filterHourly(localHourlyData, this.dateTomorrow);
             this.torbayData.hourlyData.splice(0, 1, todayTorbay, tomorTorbay);
         })}
         else {
-        this.httpClient.get(`./spareHourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`./spareHourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localHourlyData = result.features[0].properties.timeSeries
-            const todayTorbay = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-27'));
-            const tomorTorbay = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-28'));
+            const todayTorbay = this.filterHourly(localHourlyData,'2024-09-27');
+            const tomorTorbay = this.filterHourly(localHourlyData,'2024-09-28');
             this.torbayData.hourlyData.splice(0, 1, todayTorbay, tomorTorbay);
         })}
 
         //Woodbury hourly data
         if (this.localData == false) {
-        this.httpClient.get(`${this.httpHourly}latitude=${this.woodburyData.lat}&longitude=${this.woodburyData.lon}`, { headers: this.headers }).subscribe((result: any) => {
-        let localHourlyData = result.features[0].properties.timeSeries
-        const todayWoodbury = localHourlyData.filter((hour:any) => hour.time.includes(this.dateToday));
-        const tomorWoodbury = localHourlyData.filter((hour:any) => hour.time.includes(this.dateTomorrow));
-        this.woodburyData.hourlyData.splice(0, 1, todayWoodbury, tomorWoodbury);
+            this.httpClient.get(`${this.httpHourly}latitude=${this.woodburyData.lat}&longitude=${this.woodburyData.lon}`, { headers: this.headers }).subscribe((result: any) => {
+            let localHourlyData = result.features[0].properties.timeSeries
+            const todayWoodbury = this.filterHourly(localHourlyData, this.dateToday);
+            const tomorWoodbury = this.filterHourly(localHourlyData, this.dateTomorrow);
+            this.woodburyData.hourlyData.splice(0, 1, todayWoodbury, tomorWoodbury);
         })}
         else {
-        this.httpClient.get(`./spareHourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`./spareHourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localHourlyData = result.features[0].properties.timeSeries
-            const todayWoodbury = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-27'));
-            const tomorWoodbury = localHourlyData.filter((hour:any) => hour.time.includes('2024-09-28'));
+            const todayWoodbury = this.filterHourly(localHourlyData,'2024-09-27');
+            const tomorWoodbury = this.filterHourly(localHourlyData,'2024-09-28');
             this.woodburyData.hourlyData.splice(0, 1, todayWoodbury, tomorWoodbury);
         })}
     }
@@ -102,13 +104,13 @@ export class AppService {
     loadDailyData() {
         //Okehampton daily data
         if (this.localData == false) {
-        this.httpClient.get(`${this.httpDaily}latitude=${this.okehamptonData.lat}&longitude=${this.okehamptonData.lon}`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`${this.httpDaily}latitude=${this.okehamptonData.lat}&longitude=${this.okehamptonData.lon}`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
             localDailyData.splice(0, 2);
             this.okehamptonData.dailyData.splice(0, 1, localDailyData);
         })}
         else {
-        this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
             localDailyData.splice(0, 2);
             this.okehamptonData.dailyData.splice(0, 1, localDailyData);
@@ -116,13 +118,13 @@ export class AppService {
 
         //Torbay daily data
         if (this.localData == false) {
-        this.httpClient.get(`${this.httpDaily}latitude=${this.torbayData.lat}&longitude=${this.torbayData.lon}`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`${this.httpDaily}latitude=${this.torbayData.lat}&longitude=${this.torbayData.lon}`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
             localDailyData.splice(0, 2);
             this.torbayData.dailyData.splice(0, 1, localDailyData);
         })}
         else {
-        this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
             localDailyData.splice(0, 2);
             this.torbayData.dailyData.splice(0, 1, localDailyData);
@@ -130,13 +132,13 @@ export class AppService {
 
         //Woodbury daily data
         if (this.localData == false) {
-        this.httpClient.get(`${this.httpDaily}latitude=${this.woodburyData.lat}&longitude=${this.woodburyData.lon}`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`${this.httpDaily}latitude=${this.woodburyData.lat}&longitude=${this.woodburyData.lon}`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
             localDailyData.splice(0, 2);
             this.woodburyData.dailyData.splice(0, 1, localDailyData);
         })}
         else {
-        this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
+            this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
             let localDailyData = result.features[0].properties.timeSeries;
             localDailyData.splice(0, 2);
             this.woodburyData.dailyData.splice(0, 1, localDailyData);
@@ -156,10 +158,13 @@ export class AppService {
         else return console.log('place name not valid');
     }
 
+    filterHourly(data:any, date:string) {
+        const filteredData = data.filter((hour:any) => hour.time.includes(date));
+        return filteredData;
+    }
+
     conditionHighlight(wind:number, precip:number, vis:number) {
-    if (wind <= 9 
-    && precip <= 20 
-    && vis >= 9000) {
+    if (wind <= this.windCond && precip <= this.precipCond && vis >= this.visCond) {
         return true;
     } 
     else {

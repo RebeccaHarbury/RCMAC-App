@@ -1,8 +1,14 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { AppService } from '../app.service';
 import { RouterLink } from '@angular/router';
 import { DateTime } from 'luxon';
+
+import { Store } from '@ngrx/store';
+import { selectFavourite } from '../state/favourite/favourite.selectors';
+import { Observable } from 'rxjs';
+import { AppState } from '../state/app.state';
+import { addFavourite, deleteFavourite } from '../state/favourite/favourite.actions';
 
 @Component({
   selector: 'weather-display-component',
@@ -15,20 +21,34 @@ import { DateTime } from 'luxon';
   ],
   styleUrl: './weather-display.component.scss'
 })
-export class WeatherDisplayComponent {
+export class WeatherDisplayComponent implements OnInit{
   dateNow = DateTime.local().toISO();
   locationData: any = [];
-  dailyData: any = [];
-  place_data = [
-    { name: 'Okehampton', lat: 50.7390, lon: -4.0032 },
-    { name: 'Torbay', lat: 50.4517, lon: -3.5579 },
-    { name: 'Woodbury', lat: 50.6768, lon: -3.4005 }
-  ];
   fav_img = '';
 
   service = inject(AppService);
 
-  constructor() { }
+
+
+  fav_location$: Observable<String> = new Observable<String>;
+
+  constructor(private store: Store<AppState>) {
+    this.fav_location$ = this.store.select(selectFavourite)
+  }
+
+  onFavourite(location: String) {
+    
+    //if (this.fav_location$ !== location) {
+      this.store.dispatch(addFavourite({ location }))
+    //}
+    //else {
+    //  this.store.dispatch(deleteFavourite({ location }))
+    //}
+
+
+  }
+
+
 
   idealConditions(data: any) {
     const wind = data.windSpeed10m;
@@ -37,18 +57,6 @@ export class WeatherDisplayComponent {
     return this.service.conditionHighlight(wind, precip, vis);
   }
 
-  favourite(event: Event, location: string) {
-    event.stopImmediatePropagation()
-    let favourite_location = localStorage.getItem('favourite');
-    if (location !== favourite_location) {
-      localStorage.setItem('favourite', location);
-    }
-    else {
-      localStorage.removeItem('favourite');
-    }
-    favourite_location = localStorage.getItem('favourite');
-    console.log(favourite_location);
-  }
 
   isFavourite(location: string) {
     let favourite_location = localStorage.getItem('favourite');

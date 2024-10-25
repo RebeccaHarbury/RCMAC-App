@@ -6,9 +6,8 @@ import { DateTime } from 'luxon';
 
 import { Store } from '@ngrx/store';
 import { selectFavourite } from '../state/favourite/favourite.selectors';
-import { Observable } from 'rxjs';
 import { AppState } from '../state/app.state';
-import { addFavourite, deleteFavourite } from '../state/favourite/favourite.actions';
+import { addFavourite, deleteFavourite, loadFavourite } from '../state/favourite/favourite.actions';
 
 @Component({
   selector: 'weather-display-component',
@@ -28,24 +27,23 @@ export class WeatherDisplayComponent implements OnInit{
 
   service = inject(AppService);
 
-
-
-  fav_location$: Observable<String> = new Observable<String>;
+  fav_location$: String = new String;
 
   constructor(private store: Store<AppState>) {
-    this.fav_location$ = this.store.select(selectFavourite)
-  }
-
-  onFavourite(location: String) {
+    this.store.dispatch(loadFavourite())
+    this.store.select(selectFavourite).subscribe(favourite => {
+      this.fav_location$ = favourite
+    })
+    }
     
-    //if (this.fav_location$ !== location) {
+
+  onFavourite(location: string) {
+    if (this.fav_location$ !== location) {
       this.store.dispatch(addFavourite({ location }))
-    //}
-    //else {
-    //  this.store.dispatch(deleteFavourite({ location }))
-    //}
-
-
+    }
+    else {
+      this.store.dispatch(deleteFavourite({ location }))
+    }
   }
 
 
@@ -59,8 +57,7 @@ export class WeatherDisplayComponent implements OnInit{
 
 
   isFavourite(location: string) {
-    let favourite_location = localStorage.getItem('favourite');
-    if (location === favourite_location) {
+    if (location === this.fav_location$) {
       this.fav_img = 'images/star-filled.png';
       return true;
     }
@@ -75,5 +72,7 @@ export class WeatherDisplayComponent implements OnInit{
     this.locationData.push(this.service.getData('Torbay'));
     this.locationData.push(this.service.getData('Woodbury'));
     console.log('weather display on init:', this.locationData);
+
+    console.log(this.fav_location$)
   }
 }

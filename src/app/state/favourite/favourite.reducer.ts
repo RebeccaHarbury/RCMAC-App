@@ -1,13 +1,18 @@
 import { createReducer, on } from "@ngrx/store";
-import { addFavourite, deleteFavourite } from "./favourite.actions";
+import { addFavourite, deleteFavourite, loadFavourite, loadFavouriteFailure, loadFavouriteSuccess } from "./favourite.actions";
 
 
 export interface FavouriteSite {
-    location: String,
+    location: string;
+    error: any;
+    status: string;
+    
 }
 
 export const initialFavouriteState: FavouriteSite = {
-    location: "",
+    location: '',
+    error: null,
+    status: 'pending',
 };
 
 export const favouriteReducer = createReducer(
@@ -16,10 +21,26 @@ export const favouriteReducer = createReducer(
        ...state,
        location: location }
     )),
+
     on(deleteFavourite, (state) => ({
         ...state,
-        favouriteLocation: state.location = "",
-    }))
+        location: "",
+    })),
+
+    on(loadFavourite, (state) => ({ ...state, status: 'loading' })),
+
+    on(loadFavouriteSuccess, (state, { location }) => ({
+      ...state,
+      location: location,
+      error: null,
+      status: 'success',
+    })),
+
+    on(loadFavouriteFailure, (state, { error }) => ({
+      ...state,
+      error: error,
+      status: 'error',
+    })),
 )
 
 

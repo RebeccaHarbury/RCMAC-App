@@ -1,10 +1,10 @@
 <div class="dateTimeBar">
-<span class="time">{{dateNow | date:'h:mm a'}} {{ fav_location$ }}</span><span class="date">{{dateNow | date:'EEEE d MMMM y'}}</span>
+<span class="time">{{dateNow | date:'h:mm a'}}</span><span class="date">{{dateNow | date:'EEEE d MMMM y'}}</span>
 </div>
 <div class="cards"> 
   <ng-container *ngFor="let location of locationData; let i=index;">
     <a [ngClass]="{'ideal': idealConditions(locationData[i].hourlyData[0][2])}" class="card" [routerLink]="[location.name]">
-      <button [ngClass]="{'favourite': isFavourite(location.name)}" (click)="onFavourite(location.name);" ><img src={{fav_img}}/></button>
+      <button [ngClass]="{'favourite': isFavourite(location.name)}" (click)="onFavourite($event, location.name);"><img src={{fav_img}}/></button>
       <p class="place">{{location.name}}</p> 
       <span><img src="images/weather-{{locationData[i].hourlyData[0][2].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
       <p class="hourlyTemperature"> {{locationData[i].hourlyData[0][2].screenTemperature | number: '1.0-0'}}&deg;C</p>

@@ -3,7 +3,6 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { AppService } from '../app.service';
 import { RouterLink } from '@angular/router';
 import { DateTime } from 'luxon';
-
 import { Store } from '@ngrx/store';
 import { selectFavourite } from '../state/favourite/favourite.selectors';
 import { AppState } from '../state/app.state';
@@ -20,6 +19,7 @@ import { addFavourite, deleteFavourite, loadFavourite } from '../state/favourite
   ],
   styleUrl: './weather-display.component.scss'
 })
+
 export class WeatherDisplayComponent implements OnInit{
   dateNow = DateTime.local().toISO();
   locationData: any = [];
@@ -36,8 +36,10 @@ export class WeatherDisplayComponent implements OnInit{
     })
     }
     
-
-  onFavourite(location: string) {
+  onFavourite(event: Event, location: string) {
+    event.stopPropagation()
+    event.preventDefault()
+ 
     if (this.fav_location$ !== location) {
       this.store.dispatch(addFavourite({ location }))
     }
@@ -46,15 +48,12 @@ export class WeatherDisplayComponent implements OnInit{
     }
   }
 
-
-
   idealConditions(data: any) {
     const wind = data.windSpeed10m;
     const precip = data.probOfPrecipitation;
     const vis = data.visibility;
     return this.service.conditionHighlight(wind, precip, vis);
   }
-
 
   isFavourite(location: string) {
     if (location === this.fav_location$) {
@@ -71,8 +70,5 @@ export class WeatherDisplayComponent implements OnInit{
     this.locationData.push(this.service.getData('Okehampton'));
     this.locationData.push(this.service.getData('Torbay'));
     this.locationData.push(this.service.getData('Woodbury'));
-    console.log('weather display on init:', this.locationData);
-
-    console.log(this.fav_location$)
   }
 }

@@ -3,16 +3,17 @@
 </div>
 <div class="cards"> 
   <ng-container *ngFor="let location of locationData; let i=index;">
-    <a [ngClass]="{'ideal': idealConditions(locationData[i].hourlyData[0][2])}" class="card" [routerLink]="[location.name]">
+    <a [ngClass]="{'ideal': idealConditions(locationData[i].hourlyData[0][weatherIndex(current)])}" class="card" [routerLink]="[location.name]">
       <button [ngClass]="{'favourite': isFavourite(location.name)}" (click)="onFavourite($event, location.name);"><img src={{fav_img}}/></button>
-      <p class="place">{{location.name}}</p> 
-      <span><img src="images/weather-{{locationData[i].hourlyData[0][2].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
-      <p class="hourlyTemperature"> {{locationData[i].hourlyData[0][2].screenTemperature | number: '1.0-0'}}&deg;C</p>
-      <p><img src="images/weather-33.png" alt="windy icon" />{{locationData[i].hourlyData[0][2].windSpeed10m | number: '1.0-0'}}mph</p>
-      <p><img src="images/weather-31.png" alt="gust icon" />{{locationData[i].hourlyData[0][2].windGustSpeed10m | number: '1.0-0'}}mph</p>        
-      <p><img src="images/weather-32.png" alt="precipitation percentage icon"/>{{locationData[i].hourlyData[0][2].probOfPrecipitation | number: '1.0-0'}}&percnt;</p>
-      <p><img src="images/weather-6.png" alt="foggy icon"/>{{locationData[i].hourlyData[0][2].visibility | number: '1.0-0'}}m</p>
+      <p class="place">{{location.name}}</p>
+      <p class="time">{{locationData[i].hourlyData[0][weatherIndex(current)].time | date:'hh:mm a'}}</p>
+      <span><img src="images/weather-{{locationData[i].hourlyData[0][weatherIndex(current)].significantWeatherCode}}.png" alt="weather icon" class="weatherIcon"/></span>
+      <p class="hourlyTemperature"> {{locationData[i].hourlyData[0][weatherIndex(current)].screenTemperature | number: '1.0-0'}}&deg;C</p>
+      <p><img src="images/weather-33.png" alt="windy icon" />{{locationData[i].hourlyData[0][weatherIndex(current)].windSpeed10m | number: '1.0-0'}}mph</p>
+      <p><img src="images/weather-31.png" alt="gust icon" />{{locationData[i].hourlyData[0][weatherIndex(current)].windGustSpeed10m | number: '1.0-0'}}mph</p>        
+      <p><img src="images/weather-32.png" alt="precipitation percentage icon"/>{{locationData[i].hourlyData[0][weatherIndex(current)].probOfPrecipitation | number: '1.0-0'}}&percnt;</p>
+      <p><img src="images/weather-6.png" alt="foggy icon"/>{{locationData[i].hourlyData[0][weatherIndex(current)].visibility | number: '1.0-0'}}m</p>
     </a>
   </ng-container>
-</div>  
-
+</div>
+<div class="currentButton"><button class="current" (click)="currentWeather()"> {{buttonText()}} <img src="images/weather-1.png" alt="sun icon"></button></div>

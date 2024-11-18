@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { DateTime } from 'luxon';
 import { Store } from '@ngrx/store';
 import { selectFavourite } from '../state/favourite/favourite.selectors';
+import { selectTime } from '../state/time/time.selectors';
 import { AppState } from '../state/app.state';
 import { addFavourite, deleteFavourite, loadFavourite, routeFavourite } from '../state/favourite/favourite.actions';
 
@@ -22,10 +23,16 @@ import { addFavourite, deleteFavourite, loadFavourite, routeFavourite } from '..
 
 export class WeatherDisplayComponent implements OnInit {
   dateNow = DateTime.local().toISO();
+  hourNow = Number(DateTime.local().toFormat("HH"));
+  prefTime$ = Number(17);
+  notCurrent = true;
+  current = false;
+
   locationData: any = [];
   fav_img = '';
   reroute = false;
   home = false;
+  
 
   service = inject(AppService);
 
@@ -55,13 +62,6 @@ export class WeatherDisplayComponent implements OnInit {
     }
   }
 
-  idealConditions(data: any) {
-    const wind = data.windSpeed10m;
-    const precip = data.probOfPrecipitation;
-    const vis = data.visibility;
-    return this.service.conditionHighlight(wind, precip, vis);
-  }
-
   isFavourite(location: string) {
     if (location === this.fav_location$) {
       this.fav_img = 'images/star-filled.png';
@@ -72,6 +72,45 @@ export class WeatherDisplayComponent implements OnInit {
       return false;
     }
   }
+
+  weatherIndex(current: boolean) {
+    if (current === false) {
+      return this.findIndex()
+    }
+    else {
+      return 1
+    }
+  }
+
+  findIndex() {
+    if (this.hourNow < this.prefTime$) {
+      return this.locationData[0].hourlyData[0].findIndex((hour: any) => hour.time.includes(this.prefTime$+":00"))
+      
+    }
+    else {
+      return 1;
+    }    
+  }
+
+  currentWeather() {
+    this.current =! this.current;
+  }
+
+  buttonText() {
+    if (this.current === true) {
+      return 'Display weather for preferred time'
+    }
+    else {
+      return 'Display current weather'
+    }
+  }
+
+  idealConditions(data: any) {
+    const wind = data.windSpeed10m;
+    const precip = data.probOfPrecipitation;
+    const vis = data.visibility;
+    return this.service.conditionHighlight(wind, precip, vis);
+  }  
 
   ngOnInit() {
     this.locationData.push(this.service.getData('Okehampton'));

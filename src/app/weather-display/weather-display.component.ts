@@ -6,7 +6,7 @@ import { DateTime } from 'luxon';
 import { Store } from '@ngrx/store';
 import { selectFavourite } from '../state/favourite/favourite.selectors';
 import { AppState } from '../state/app.state';
-import { addFavourite, deleteFavourite, loadFavourite, routeFavourite  } from '../state/favourite/favourite.actions';
+import { addFavourite, deleteFavourite, loadFavourite, routeFavourite } from '../state/favourite/favourite.actions';
 
 @Component({
   selector: 'weather-display-component',
@@ -20,31 +20,33 @@ import { addFavourite, deleteFavourite, loadFavourite, routeFavourite  } from '.
   styleUrl: './weather-display.component.scss'
 })
 
-export class WeatherDisplayComponent implements OnInit{
+export class WeatherDisplayComponent implements OnInit {
   dateNow = DateTime.local().toISO();
   locationData: any = [];
   fav_img = '';
   reroute = false;
+  home = false;
 
   service = inject(AppService);
 
   fav_location$: String = new String;
 
   constructor(private store: Store<AppState>) {
-    this.service.rerouteValue.subscribe((value)=> this.reroute = value.valueOf())
-    if (this.reroute === true) {
+    this.service.rerouteValue.subscribe((value) => this.reroute = value.valueOf())
+    this.service.homeValue.subscribe((value) => this.home = value.valueOf())
+    if (this.reroute === true && this.home === false) {
       this.store.dispatch(routeFavourite())
     }
     this.store.dispatch(loadFavourite())
     this.store.select(selectFavourite).subscribe(favourite => {
       this.fav_location$ = favourite
     })
-    }
-    
+  }
+
   onFavourite(event: Event, location: string) {
     event.stopPropagation()
     event.preventDefault()
- 
+
     if (this.fav_location$ !== location) {
       this.store.dispatch(addFavourite({ location }))
     }

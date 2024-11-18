@@ -192,10 +192,19 @@ export class AppService {
     boolValue = (this.reroute === 'true');
     private rerouteOn = new BehaviorSubject(this.boolValue);
     rerouteValue = this.rerouteOn.asObservable();
-   
-     sendValue(newValue:boolean){
-      this.rerouteOn.next(newValue);
-      localStorage.setItem('rerouteToFav', newValue.toString());
-      this.reroute = localStorage.getItem('rerouteToFav');
+
+    sendValue(newValue: boolean) {
+        this.rerouteOn.next(newValue);
+        localStorage.setItem('rerouteToFav', newValue.toString());
+        this.reroute = localStorage.getItem('rerouteToFav');
     }
+
+    private homeOn = new BehaviorSubject(false);
+    homeValue = this.homeOn.asObservable();
+
+    cancelReroute(bool: boolean) {
+        this.homeOn.next(bool);
+    }
+
+
 }

@@ -6,7 +6,7 @@ import { DateTime } from 'luxon';
 import { Store } from '@ngrx/store';
 import { selectFavourite } from '../state/favourite/favourite.selectors';
 import { AppState } from '../state/app.state';
-import { addFavourite, deleteFavourite, loadFavourite } from '../state/favourite/favourite.actions';
+import { addFavourite, deleteFavourite, loadFavourite, routeFavourite  } from '../state/favourite/favourite.actions';
 
 @Component({
   selector: 'weather-display-component',
@@ -24,12 +24,17 @@ export class WeatherDisplayComponent implements OnInit{
   dateNow = DateTime.local().toISO();
   locationData: any = [];
   fav_img = '';
+  reroute = false;
 
   service = inject(AppService);
 
   fav_location$: String = new String;
 
   constructor(private store: Store<AppState>) {
+    this.service.rerouteValue.subscribe((value)=> this.reroute = value.valueOf())
+    if (this.reroute === true) {
+      this.store.dispatch(routeFavourite())
+    }
     this.store.dispatch(loadFavourite())
     this.store.select(selectFavourite).subscribe(favourite => {
       this.fav_location$ = favourite

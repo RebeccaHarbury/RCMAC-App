@@ -14,6 +14,10 @@ export const loadFavouriteFailure = createAction(
     props<{ error: string }>()
 );
 
+export const routeFavourite = createAction(
+    '[FavouriteSite] Route Favourite'
+);
+
 export const addFavourite = createAction(
     '[FavouriteSite] Add Favourite',
     props<{ location: string }>()

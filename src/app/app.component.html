@@ -1,6 +1,6 @@
-<h1 [routerLink]="['']"><img src='RCMACfavicon.ico'/> {{title}} </h1>
+<h1 [routerLink]="['']" (click)="home();"><img src='RCMACfavicon.ico'/> {{title}} </h1>
 <h2>
-    <div class="navBar">This will be the navigation bar...maybe</div>
+    <div class="navBar">This will be the navigation bar...maybe <mat-button-toggle [ngClass]="{checked: reroute === true}" class="toggleButton" (click)="onSwitch();">Display <img src="images/star-filled.png" alt=""></mat-button-toggle></div>
 </h2>
 <body>
     <router-outlet></router-outlet>

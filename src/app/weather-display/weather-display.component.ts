@@ -1,8 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { AppService } from '../app.service';
 import { RouterLink } from '@angular/router';
 import { DateTime } from 'luxon';
+import { Store } from '@ngrx/store';
+import { selectFavourite } from '../state/favourite/favourite.selectors';
+import { AppState } from '../state/app.state';
+import { addFavourite, deleteFavourite, loadFavourite, routeFavourite } from '../state/favourite/favourite.actions';
 
 @Component({
   selector: 'weather-display-component',
@@ -15,35 +19,63 @@ import { DateTime } from 'luxon';
   ],
   styleUrl: './weather-display.component.scss'
 })
-export class WeatherDisplayComponent {
+
+export class WeatherDisplayComponent implements OnInit {
   dateNow = DateTime.local().toISO();
   locationData: any = [];
-  dailyData: any = [];
-  place_data = [
-    { name: 'Okehampton', lat: 50.7390, lon: -4.0032 },
-    { name: 'Torbay', lat: 50.4517, lon: -3.5579 },
-    { name: 'Woodbury', lat: 50.6768, lon: -3.4005 }
-  ];
-  
+  fav_img = '';
+  reroute = false;
+  home = false;
 
-  service = inject(AppService)
+  service = inject(AppService);
 
-  constructor() {}
+  fav_location$: String = new String;
 
-  idealConditions(data:any) {
+  constructor(private store: Store<AppState>) {
+    this.service.rerouteValue.subscribe((value) => this.reroute = value.valueOf())
+    this.service.homeValue.subscribe((value) => this.home = value.valueOf())
+    if (this.reroute === true && this.home === false) {
+      this.store.dispatch(routeFavourite())
+    }
+    this.store.dispatch(loadFavourite())
+    this.store.select(selectFavourite).subscribe(favourite => {
+      this.fav_location$ = favourite
+    })
+  }
+
+  onFavourite(event: Event, location: string) {
+    event.stopPropagation()
+    event.preventDefault()
+
+    if (this.fav_location$ !== location) {
+      this.store.dispatch(addFavourite({ location }))
+    }
+    else {
+      this.store.dispatch(deleteFavourite({ location }))
+    }
+  }
+
+  idealConditions(data: any) {
     const wind = data.windSpeed10m;
     const precip = data.probOfPrecipitation;
     const vis = data.visibility;
     return this.service.conditionHighlight(wind, precip, vis);
   }
 
+  isFavourite(location: string) {
+    if (location === this.fav_location$) {
+      this.fav_img = 'images/star-filled.png';
+      return true;
+    }
+    else {
+      this.fav_img = 'images/star-empty.png';
+      return false;
+    }
+  }
+
   ngOnInit() {
     this.locationData.push(this.service.getData('Okehampton'));
-
     this.locationData.push(this.service.getData('Torbay'));
-
     this.locationData.push(this.service.getData('Woodbury'));
-    
-    console.log('weather display on init:', this.locationData);    
   }
 }

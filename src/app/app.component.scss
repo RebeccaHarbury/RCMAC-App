@@ -22,10 +22,29 @@ h2 {
   background: rgb(215, 218, 223);
   color:rgb(18, 59, 97);
   font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
-  display: grid;
-  grid-template-columns: auto auto;
+  display: block;
+  width: 100vw;
   .navBar {
-    margin: 5px 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+    margin: 0px 20px;
+    padding: 5px 5px;
+    
+    .mat-button-toggle {
+
+      justify-self: end;
+      align-self: center;
+      background-color: rgba(18, 59, 97, 0.24);
+      color: black;
+      font-size: medium;
+      img {
+        height: 25px;
+      }
+    }
+    .checked {
+      background-color: rgb(92, 134, 173);
+    }
+
   }
 }
 

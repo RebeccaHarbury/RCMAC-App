@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { DateTime } from 'luxon';
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -185,5 +186,16 @@ export class AppService {
         else {
             return false;
         }
+    }
+
+    reroute = localStorage.getItem('rerouteToFav');
+    boolValue = (this.reroute === 'true');
+    private rerouteOn = new BehaviorSubject(this.boolValue);
+    rerouteValue = this.rerouteOn.asObservable();
+   
+     sendValue(newValue:boolean){
+      this.rerouteOn.next(newValue);
+      localStorage.setItem('rerouteToFav', newValue.toString());
+      this.reroute = localStorage.getItem('rerouteToFav');
     }
 }

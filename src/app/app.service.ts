@@ -205,6 +205,4 @@ export class AppService {
     cancelReroute(bool: boolean) {
         this.homeOn.next(bool);
     }
-
-
 }

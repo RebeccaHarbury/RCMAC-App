@@ -2,12 +2,14 @@ import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppService } from './app.service';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { Store } from '@ngrx/store';
+import { AppState } from './state/app.state';
+import { setTime } from './state/time/time.actions';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, CommonModule, MatButtonToggleModule],
+  imports: [RouterLink, RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -19,13 +21,19 @@ export class AppComponent implements OnInit {
 
   reroute = this.service.boolValue;
 
+  constructor(private store: Store<AppState>) { }
+
   home() {
     this.service.cancelReroute(true);
   }
 
   onSwitch() {
-    this.reroute =! this.reroute;
-    this.service.sendValue(this.reroute);
+    this.reroute = !this.reroute;
+    this.service.rerouteBool(this.reroute);
+  }
+
+  onSetTime(time: number) {
+    this.store.dispatch(setTime({ time }))
   }
 
   ngOnInit() {

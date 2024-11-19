@@ -122,32 +122,30 @@
   .currentButton {
     display: block;
     justify-self: center;
+
     :hover {
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      cursor: pointer;  
+      cursor: pointer;
     }
   }
 
   .current {
+    margin: auto;
     display: flex;
-    place-items: center;      
+    place-items: center;
     border-radius: 20px;
     border-width: 1px;
-    padding: 5px 15px;
+    padding: 0px 15px;
     background-color: rgba(18, 59, 97, 0.24);
     color: rgb(14, 52, 87);
     font-size: medium;
+
     :hover {
       box-shadow: none;
     }
+
     img {
-      margin-left: 5px;
+      padding-left: 5px;
       height: 25px;
     }
   }
-
-  .invisible {
-    display: none;
-  }
-  
-    

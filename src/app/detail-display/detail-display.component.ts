@@ -1,8 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../app.service';
-import { WeatherDisplayComponent } from '../weather-display/weather-display.component';
 import { DailyDetailComponent } from '../daily-detail-display/daily-detail-display.component';
 import { HourlyDetailComponent } from '../hourly-detail-display/hourly-detail-display.component';
 import { Title } from '@angular/platform-browser'
@@ -12,11 +11,7 @@ import { Title } from '@angular/platform-browser'
   standalone: true,
   templateUrl: './detail-display.component.html',
   imports: [
-    RouterLink,
-    RouterOutlet,
     CommonModule,
-    DatePipe,
-    WeatherDisplayComponent,
     DailyDetailComponent,
     HourlyDetailComponent
   ],

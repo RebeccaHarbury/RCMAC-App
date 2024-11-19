@@ -4,10 +4,9 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class FavouriteService {
 
-  constructor() {}
+  constructor() { }
 
   async getFavourite(): Promise<any> {
-
     return localStorage.getItem('favourite');
   }
 

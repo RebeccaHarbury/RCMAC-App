@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AppRoutes } from './app.routes';
 import { provideStore, provideState } from '@ngrx/store';
 import { favouriteReducer } from './state/favourite/favourite.reducer';
+import { TimeReducer } from './state/time/time.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(AppRoutes),
     provideHttpClient(),
     provideStore(),
-    provideState({ name: 'favouriteLocation', reducer: favouriteReducer})
+    provideState({ name: 'favouriteLocation', reducer: favouriteReducer }),
+    provideState({ name: 'timePreference', reducer: TimeReducer })
   ]
 };

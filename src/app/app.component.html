@@ -1,10 +1,6 @@
 <h1 [routerLink]="['']" (click)="home();"><img src='RCMACfavicon.ico'/> {{title}} </h1>
 <h2>
-    <div class="navBar">This will be the navigation bar...maybe
-        <button (click)="onSetTime(19)">testing time</button> <!--Time setting will be done on a further branch-->
-        <button [ngClass]="{checked: reroute === true}" class="toggleButton" (click)="onSwitch();">
-           Load on favourite <img src="images/star-filled.png" alt="favourite icon">
-        </button></div>
+<nav-bar></nav-bar>
 </h2>
 <body>
     <router-outlet></router-outlet>

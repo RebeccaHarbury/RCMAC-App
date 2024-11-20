@@ -40,9 +40,11 @@ export class HourlyDetailComponent implements OnInit {
     return this.service.conditionHighlight(wind, precip, vis);
   }
 
-  scrollFunction() {
-    const x = ((this.prefTime$ - 1) * 225);
-    const scrollElement = document.getElementsByClassName("scroll")[1];
+  scrollFunction(i: number) {
+    const arrayLength = this.specificLocationData[0].hourlyData[i].length;
+    const diff = 24 - arrayLength;
+    const x = (this.prefTime$ - diff) * 225;
+    const scrollElement = document.getElementsByClassName("scroll")[i];
     scrollElement.scrollTo(x, 0);
   }
 

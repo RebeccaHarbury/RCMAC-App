@@ -1,28 +1,105 @@
-.navBar {
+.navbar {
+    position: sticky;
+    height: 45px;
+    top: 0;
+    font-size: medium;
     display: grid;
-    grid-template-columns: auto auto auto;
-    margin: 0px 20px;
-    padding: 5px 5px;
+    grid-template-columns: repeat(5, auto);
+    background-color: rgb(215, 218, 223);
+    overflow:visible;
 
-    .toggleButton {
-      display: flex;
-      justify-self: end;
-      align-self: center;
-      place-items: center;
-      border-radius: 20px;
-      border-width: 1px;
-      padding: 3px 15px;
-      background-color: rgba(18, 59, 97, 0.24);
-      color: rgb(14, 52, 87);
-      font-size: medium;
+    .active {
+        color: white;
+        height: inherit;
+        background-color: rgb(18, 59, 97);
+    }
+}
 
-      img {
+.navbar a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 17px;
+    color: rgb(18, 59, 97);
+}
+
+.navbar a:hover {
+    cursor: pointer;
+    background-color: rgb(92, 134, 173);
+    color: white;
+}
+
+.toggleButton {
+    display: flex;
+    justify-self: end;
+    place-items: center;
+    border-radius: 20px;
+    border-width: 2px;
+    padding: 3px 15px;
+    margin: 5px;
+    background-color: rgba(18, 59, 97, 0.24);
+    border-color: rgb(18, 59, 97);
+    color: rgb(18, 59, 97);
+    font-size: medium;
+
+    img {
         padding-left: 5px;
         height: 25px;
-      }
     }
+}
 
-    .checked {
-      background-color: rgb(92, 134, 173);
-    }
+.toggleButton:hover {
+    cursor: pointer;
+}
+
+.checked {
+    background-color: rgb(18, 59, 97);
+    color: white;
+}
+
+.navLocations {
+    float: left;
+    height: inherit;
+    overflow: hidden;
+  }
+
+  .navLocations .dropbtn {
+    font-size: inherit;
+    border: none;
+    outline: none;
+    color: inherit;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0; /* Important for vertical align on mobile phones */
+  } 
+
+  .dropbtn:hover {
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    max-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    width: 160px;
+    text-align: start;
+  }
+  
+
+  .dropdown-content a:hover {
+    background-color: #ddd;
+    color: rgb(18, 59, 97);
+    cursor: pointer;
+  }
+  
+  /* Show the dropdown menu on hover */
+  .navLocations:hover .dropdown-content {
+    display: block;
   }

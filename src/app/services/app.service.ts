@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { DateTime } from 'luxon';
 import { BehaviorSubject } from "rxjs";
+import { DateTime } from 'luxon';
 
 @Injectable({
     providedIn: 'root'
@@ -44,15 +44,11 @@ export class AppService {
         dailyData: <any>[]
     };
 
-    windCond = 9;
-    precipCond = 20;
-    visCond = 9000;
-
     reroute = localStorage.getItem('rerouteToFav');
     boolValue = (this.reroute === 'true');
     private rerouteOn = new BehaviorSubject(this.boolValue);
     rerouteValue = this.rerouteOn.asObservable();
-
+    
     private homeOn = new BehaviorSubject(false);
     homeValue = this.homeOn.asObservable();
 
@@ -185,15 +181,6 @@ export class AppService {
     filterHourly(data: any, date: string) {
         const filteredData = data.filter((hour: any) => hour.time.includes(date));
         return filteredData;
-    }
-
-    conditionHighlight(wind: number, precip: number, vis: number) {
-        if (wind <= this.windCond && precip <= this.precipCond && vis >= this.visCond) {
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 
     rerouteBool(newValue: boolean) {

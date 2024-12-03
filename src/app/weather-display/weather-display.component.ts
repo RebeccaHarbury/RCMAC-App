@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { AppService } from '../app.service';
+import { AppService } from '../services/app.service';
 import { RouterLink } from '@angular/router';
 import { DateTime } from 'luxon';
 import { Store } from '@ngrx/store';
@@ -9,6 +9,7 @@ import { selectTime } from '../state/time/time.selectors';
 import { AppState } from '../state/app.state';
 import { addFavourite, deleteFavourite, loadFavourite, routeFavourite } from '../state/favourite/favourite.actions';
 import { loadTime } from '../state/time/time.actions';
+import { ThresholdService } from '../services/threshold.service';
 
 @Component({
   selector: 'weather-display-component',
@@ -25,20 +26,22 @@ import { loadTime } from '../state/time/time.actions';
 export class WeatherDisplayComponent implements OnInit {
   dateNow = DateTime.local().toISO();
   hourNow = Number(DateTime.local().toFormat("HH"));
-  prefTime$ = 17;
-  current = false;
   locationData: any = [];
+  current = false;
   fav_img = '';
   reroute = false;
   home = false;
-
-  service = inject(AppService);
-
   fav_location$: String = new String;
+  pref_time$ = 17;
+
+  appService = inject(AppService);
+  thresholdService = inject(ThresholdService);
+
+  
 
   constructor(private store: Store<AppState>) {
-    this.service.rerouteValue.subscribe((value) => this.reroute = value.valueOf());
-    this.service.homeValue.subscribe((value) => this.home = value.valueOf());
+    this.appService.rerouteValue.subscribe((value) => this.reroute = value.valueOf());
+    this.appService.homeValue.subscribe((value) => this.home = value.valueOf());
     if (this.reroute === true && this.home === false) {
       this.store.dispatch(routeFavourite());
     }
@@ -49,7 +52,7 @@ export class WeatherDisplayComponent implements OnInit {
 
     this.store.dispatch(loadTime())
     this.store.select(selectTime).subscribe(time => {
-      this.prefTime$ = time;
+      this.pref_time$ = time;
     })
   }
 
@@ -86,8 +89,8 @@ export class WeatherDisplayComponent implements OnInit {
   }
 
   findIndex() {
-    if (this.hourNow < this.prefTime$) {
-      return this.locationData[0].hourlyData[0].findIndex((hour: any) => hour.time.includes(this.prefTime$ + ":00"));
+    if (this.hourNow < this.pref_time$) {
+      return this.locationData[0].hourlyData[0].findIndex((hour: any) => hour.time.includes(this.pref_time$ + ":00"));
     }
     else {
       return 1;
@@ -95,10 +98,10 @@ export class WeatherDisplayComponent implements OnInit {
   }
 
   currentWeather() {
-    if (this.hourNow < this.prefTime$) {
+    if (this.hourNow < this.pref_time$) {
       this.current = !this.current;
     }
-    else if (this.hourNow > this.prefTime$) {
+    else if (this.hourNow > this.pref_time$) {
       alert('Cannot load preferred time for today as it has passed. \n For a more detailed view please select a location.');
     }
   }
@@ -107,7 +110,7 @@ export class WeatherDisplayComponent implements OnInit {
     if (this.current === true) {
       return 'Display weather for preferred time';
     }
-    else if (this.hourNow > this.prefTime$) {
+    else if (this.hourNow > this.pref_time$) {
       return 'Displaying current weather';
     }
     else {
@@ -119,12 +122,12 @@ export class WeatherDisplayComponent implements OnInit {
     const wind = data.windSpeed10m;
     const precip = data.probOfPrecipitation;
     const vis = data.visibility;
-    return this.service.conditionHighlight(wind, precip, vis);
+    return this.thresholdService.conditionHighlight(wind, precip, vis);
   }
 
   ngOnInit() {
-    this.locationData.push(this.service.getData('Okehampton'));
-    this.locationData.push(this.service.getData('Torbay'));
-    this.locationData.push(this.service.getData('Woodbury'));
+    this.locationData.push(this.appService.getData('Okehampton'));
+    this.locationData.push(this.appService.getData('Torbay'));
+    this.locationData.push(this.appService.getData('Woodbury'));
   }
 }

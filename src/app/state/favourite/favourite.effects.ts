@@ -13,7 +13,7 @@ import { Store } from '@ngrx/store';
 import { selectFavourite } from './favourite.selectors';
 import { AppState } from '../app.state';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
-import { FavouriteService } from '../../weather-display/favourite.service';
+import { FavouriteService } from '../../services/favourite.service';
 import { Router } from '@angular/router';
 
 @Injectable()

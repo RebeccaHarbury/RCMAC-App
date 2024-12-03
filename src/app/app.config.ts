@@ -1,11 +1,12 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
-import { AppService } from './app.service';
+import { AppService } from './services/app.service';
 import { AppRoutes } from './app.routes';
 import { provideStore, provideState } from '@ngrx/store';
 import { favouriteReducer } from './state/favourite/favourite.reducer';
 import { TimeReducer } from './state/time/time.reducer';
+import { thresholdReducer } from './state/thresholds/thresholds.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(),
     provideState({ name: 'favouriteLocation', reducer: favouriteReducer }),
-    provideState({ name: 'timePreference', reducer: TimeReducer })
+    provideState({ name: 'timePreference', reducer: TimeReducer }),
+    provideState({ name: 'weatherThresholds', reducer: thresholdReducer}),
   ]
 };

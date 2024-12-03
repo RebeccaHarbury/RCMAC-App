@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { AppService } from '../app.service';
+import { AppService } from '../services/app.service';
+import { ThresholdService } from '../services/threshold.service';
 
 @Component({
   selector: 'daily-detail-display',
@@ -16,7 +17,8 @@ import { AppService } from '../app.service';
 export class DailyDetailComponent implements OnInit {
   specificLocationData: any = [];
 
-  service = inject(AppService);
+  appService = inject(AppService);
+  thresholdService = inject(ThresholdService);
 
   constructor(
     private route: ActivatedRoute,
@@ -26,13 +28,13 @@ export class DailyDetailComponent implements OnInit {
     const wind = data.midday10MWindSpeed;
     const precip = data.dayProbabilityOfPrecipitation;
     const vis = data.middayVisibility;
-    return this.service.conditionHighlight(wind, precip, vis);
+    return this.thresholdService.conditionHighlight(wind, precip, vis);
   }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.specificLocationData.push(
-      this.service.getData(id));
+      this.appService.getData(id));
     console.log('daily display on init:', this.specificLocationData);
   }
 }

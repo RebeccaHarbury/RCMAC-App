@@ -1,8 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { AppService } from '../app.service';
 import { Store } from '@ngrx/store';
+import { AppService } from '../services/app.service';
+import { ThresholdService } from '../services/threshold.service';
 import { AppState } from '../state/app.state';
 import { loadTime } from '../state/time/time.actions';
 import { selectTime } from '../state/time/time.selectors';
@@ -21,7 +22,8 @@ export class HourlyDetailComponent implements OnInit {
   specificLocationData: any = [];
   prefTime$ = 17;
 
-  service = inject(AppService);
+  appService = inject(AppService);
+  thresholdService = inject(ThresholdService);
 
   constructor(
     private store: Store<AppState>,
@@ -37,7 +39,7 @@ export class HourlyDetailComponent implements OnInit {
     const wind = data.windSpeed10m;
     const precip = data.probOfPrecipitation;
     const vis = data.visibility;
-    return this.service.conditionHighlight(wind, precip, vis);
+    return this.thresholdService.conditionHighlight(wind, precip, vis);
   }
 
   scrollFunction(i: number) {
@@ -51,7 +53,7 @@ export class HourlyDetailComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
     this.specificLocationData.push(
-      this.service.getData(id));
+      this.appService.getData(id));
     console.log('hourly display on init:', this.specificLocationData);
   }
 }

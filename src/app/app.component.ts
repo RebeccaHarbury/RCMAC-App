@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AppService } from './app.service';
-import { navBarComponent } from "./nav-bar/nav-bar.component";
+import { AppService } from './services/app.service';
+import { navbarComponent } from "./nav-bar/nav-bar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, CommonModule, navBarComponent],
+  imports: [RouterLink, RouterOutlet, CommonModule, navbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

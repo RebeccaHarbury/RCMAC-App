@@ -9,7 +9,7 @@ import { DateTime } from 'luxon';
 export class AppService {
 
     //switch between local and remote data
-    localData = true;
+    localData = false;
 
     httpHourly = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?'; //hourly data http call
     httpDaily = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?'; //daily data http call

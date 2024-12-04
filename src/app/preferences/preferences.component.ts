@@ -94,6 +94,15 @@ export class PreferencesComponent implements OnInit {
     this.store.dispatch(changeThresholdVis({ vis }));
   }
 
+  isPrefThresholds(wind: number, precip: number, vis: number) {
+    if (wind === this.pref_wind$ && precip === this.pref_precip$ && vis === this.pref_vis$) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   ngOnInit() {
 
   }

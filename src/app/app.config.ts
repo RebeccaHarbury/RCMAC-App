@@ -7,6 +7,7 @@ import { provideStore, provideState } from '@ngrx/store';
 import { favouriteReducer } from './state/favourite/favourite.reducer';
 import { TimeReducer } from './state/time/time.reducer';
 import { thresholdReducer } from './state/thresholds/thresholds.reducer';
+import { aircraftReducer } from './state/aircraft/aircraft.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,5 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: 'favouriteLocation', reducer: favouriteReducer }),
     provideState({ name: 'timePreference', reducer: TimeReducer }),
     provideState({ name: 'weatherThresholds', reducer: thresholdReducer}),
+    provideState({ name: 'aircraftInfo', reducer: aircraftReducer})
   ]
 };

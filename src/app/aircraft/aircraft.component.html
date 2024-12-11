@@ -1,7 +1,7 @@
 <div class="aircraft">
 <button class="open-button" (click)="openForm(true)">
     <img class="iconImg" src="images/plus.png" alt="plus sign">
-    <p>New Aircraft</p>
+    <p class="aircraftName">New Aircraft</p>
 </button>
 
 <ng-container *ngFor="let aircraft of savedAircraft; let i=index;">
@@ -15,14 +15,14 @@
 </ng-container>
 
 <div [ngClass]="{'form-popup-true' : open }" class="form-popup" id="myForm">
-  <form class="form-container">
+  <form class="form-container" (submit)="newAircraft(name.value, icon.value, textColour.value, backgroundColour.value, wind.value, precip.value, vis.value)">
     <h2>New Aircraft</h2>
 
     <label for="name"><b>Name</b></label>
     <input #name id="name" type="text" placeholder="Name" name="name" required>
 
     <label for="icon"><img src="images/plane{{selected_icon}}.png" alt="icon{{selected_icon}}" class="iconImgSmall"><b>Icon</b></label>
-    <select #icon id="icon" name="icon" (change)="onSelected(icon.value)">
+    <select #icon id="icon" name="icon" (change)="onSelected(icon.value)" required>
       <option selected value="1">1
       <option value="2">2
       <option value="3">3
@@ -40,10 +40,10 @@
       </select>
 
     <label for="textColour"><b>Text Colour</b></label>
-    <input #textColour id="textColour" type="color" name="textColour" value="#123B61" required>
+    <input #textColour id="textColour" type="color" name="textColour" value="#123B61">
 
     <label for="backgroundColour"><b>Background Colour</b></label>
-    <input #backgroundColour id="backgroundColour" type="color" name="backgroundColour" value="#B9CEE2" required>
+    <input #backgroundColour id="backgroundColour" type="color" name="backgroundColour" value="#B9CEE2">
 
     <label for="wind"><b>Wind Speed</b></label>
     <input #wind id="wind" type="number" placeholder="9" name="wind" required> mph
@@ -54,7 +54,7 @@
     <label for="vis"><b>Visible distance</b></label>
     <input #vis id="vis" type="number" placeholder="9000" name="vis" required> m
 
-    <button type="button" class="btn" (click)="newAircraft(name.value, icon.value, textColour.value, backgroundColour.value, wind.value, precip.value, vis.value)">Save</button>
+    <button type="submit" class="btn">Save</button>
     <button type="button" class="btn cancel" (click)="openForm(false)">Cancel</button>
   </form>
 </div>

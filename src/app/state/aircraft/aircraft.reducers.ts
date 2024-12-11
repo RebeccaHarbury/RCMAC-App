@@ -45,7 +45,7 @@ export const aircraftReducer = createReducer(
 
     on(addAircraft, (state, { details }) => ({
         ...state,
-        aircraft: [ ...state?.aircraft || [], details ],
+        aircraft: [ ...state.aircraft, details ],
     }
 )),
 

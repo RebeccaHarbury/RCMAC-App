@@ -19,7 +19,7 @@ import { selectSavedAircraft } from '../state/aircraft/aircraft.selectors';
 export class AircraftComponent implements OnInit {
     open = false;
 
-    savedAircraft: any[] = [];
+    savedAircraft = new Array;
     selected_aircraft = "Plane 1";
     selected_icon = 1;
     
@@ -30,6 +30,7 @@ export class AircraftComponent implements OnInit {
         this.store.select(selectSavedAircraft).subscribe(aircraft => {
             this.savedAircraft = aircraft;
         })
+
     }
 
     openForm(boolValue: boolean) {
@@ -61,6 +62,7 @@ export class AircraftComponent implements OnInit {
         console.log(details);
         this.store.dispatch(addAircraft({ details
         }))
+        console.log(this.savedAircraft)
     }
 
     ngOnInit() {

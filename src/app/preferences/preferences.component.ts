@@ -79,16 +79,7 @@ export class PreferencesComponent implements OnInit {
     }
   }
 
-  onSetThresholds(wind: number, precip: number, vis: number) {
-    this.store.dispatch(changeThresholdWind({ wind }));
-    this.store.dispatch(changeThresholdPrecip({ precip }));
-    this.store.dispatch(changeThresholdVis({ vis }));
-  }
-
-  onChangeThresholds() {
-    const wind = Number((<HTMLInputElement>document.getElementById("wind")).value);
-    const precip = Number((<HTMLInputElement>document.getElementById("precip")).value);
-    const vis = Number((<HTMLInputElement>document.getElementById("vis")).value);
+  onChangeThresholds(wind: any, precip: any, vis: any) {
     this.store.dispatch(changeThresholdWind({ wind }));
     this.store.dispatch(changeThresholdPrecip({ precip }));
     this.store.dispatch(changeThresholdVis({ vis }));
@@ -104,6 +95,5 @@ export class PreferencesComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 }

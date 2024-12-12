@@ -5,16 +5,16 @@
 </button>
 
 <ng-container *ngFor="let aircraft of savedAircraft; let i=index;">
-    <div [ngClass]="{aircraftSelected : savedAircraft[i].name === selected_aircraft}" class="aircraftInfo">
+    <a [ngClass]="{aircraftSelected : savedAircraft[i].name === selected_aircraft}" class="aircraftInfo" (click)="editForm(true, i)">
         <p class="aircraftName" style="background-color: {{savedAircraft[i].backgroundColour}};color:{{savedAircraft[i].textColour}}"> {{savedAircraft[i].name}} </p>
         <span><img src="images/plane{{savedAircraft[i].icon}}.png" alt="aircraft icon" class="iconImg"/></span>
         <p><img class="weatherIcon" src="images/weather-33.png" alt="windy icon" />{{savedAircraft[i].wind}}mph</p>
         <p><img class="weatherIcon" src="images/weather-32.png" alt="precipitation percentage icon"/>{{savedAircraft[i].precip}}&percnt;</p>
         <p><img class="weatherIcon" src="images/weather-6.png" alt="foggy icon"/>{{savedAircraft[i].vis}}m</p>
-    </div>
+    </a>
 </ng-container>
 
-<div [ngClass]="{'form-popup-true' : open }" class="form-popup" id="myForm">
+<div [ngClass]="{'form-popup-true' : newOpen }" class="form-popup" id="myForm">
   <form class="form-container" (submit)="newAircraft(name.value, icon.value, textColour.value, backgroundColour.value, wind.value, precip.value, vis.value)">
     <h2>New Aircraft</h2>
 
@@ -56,6 +56,65 @@
 
     <button type="submit" class="btn">Save</button>
     <button type="button" class="btn cancel" (click)="openForm(false)">Cancel</button>
+  </form>
+</div>
+
+<div [ngClass]="{'form-popup-true' : editOpen }" class="form-popup" id="editForm">
+  <form class="form-container" (submit)="editAircraft(savedAircraft[current_index].id, newName.value, newIcon.value, newTextColour.value, newBackgroundColour.value, newWind.value, newPrecip.value, newVis.value)">
+    <h2>Edit Aircraft</h2>
+
+    <label for="name"><b>Name</b></label>
+    <input #newName id="name" type="text" value="{{savedAircraft[current_index].name}}" name="name" required>
+
+    <label for="icon"><img src="images/plane{{selected_icon}}.png" alt="icon{{selected_icon}}" class="iconImgSmall"><b>Icon</b></label>
+    <select #newIcon id="icon" name="icon" (change)="onSelected(newIcon.value)" value="{{savedAircraft[current_index].icon}}" required>
+      <option value="1">1
+      <option value="2">2
+      <option value="3">3
+      <option value="4">4
+      <option value="5">5
+      <option value="6">6
+      <option value="7">7
+      <option value="8">8
+      <option value="9">9
+      <option value="10">10
+      <option value="11">11
+      <option value="12">12
+      <option value="13">13
+      <option value="14">14
+      </select>
+
+    <label for="textColour"><b>Text Colour</b></label>
+    <input #newTextColour id="textColour" type="color" name="textColour" value="{{savedAircraft[current_index].textColour}}">
+
+    <label for="backgroundColour"><b>Background Colour</b></label>
+    <input #newBackgroundColour id="backgroundColour" type="color" name="backgroundColour" value="{{savedAircraft[current_index].backgroundColour}}">
+
+    <label for="wind"><b>Wind Speed</b></label>
+    <input #newWind id="wind" type="number" value="{{savedAircraft[current_index].wind}}" name="wind" required> mph
+    
+    <label for="precip"><b>Precipitation Chance</b></label>
+    <input #newPrecip id="precip" type="number" value="{{savedAircraft[current_index].precip}}" name="precip" required> %
+
+    <label for="vis"><b>Visible distance</b></label>
+    <input #newVis id="vis" type="number" value="{{savedAircraft[current_index].vis}}" name="vis" required> m
+
+    <button type="submit" class="btn">Save</button>
+    <button type="button" class="btn delete" (click)="deleteForm(true)">Delete</button>
+    <button type="button" class="btn cancel" (click)="editForm(false, 0)">Cancel</button>
+  </form>
+</div>
+
+<div [ngClass]="{'form-popup-true' : deleteOpen }" class="delete-popup" id="deleteForm">
+  <form class="delete-form-container">
+    <h2>Delete Aircraft?</h2>
+
+    <p id="name" required>Are you sure you want to delete {{savedAircraft[current_index].name}}?
+      This action cannot be undone.
+    </p>
+
+    <button type="button" class="btn delete" (click)="deleteAircraft(savedAircraft[current_index].id)">Delete</button>
+    <button type="button" class="btn cancel" (click)="deleteForm(false)">Cancel</button>
   </form>
 </div>
 </div>

@@ -4,4 +4,5 @@ import { AircraftState } from "./aircraft.reducers";
 
 export const selectAircraftState = (state:AppState) => state.aircraftInfo;
 export const selectSavedAircraft = createSelector(selectAircraftState, (state: AircraftState) => state.aircraft);
+export const selectNumberAircraft = createSelector(selectAircraftState, (state: AircraftState) => state.aircraftNumber);
 export const selectSelectedAircraft = createSelector(selectAircraftState, (state: AircraftState) => state.selected);

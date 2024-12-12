@@ -14,4 +14,13 @@ export class AircraftService {
   async saveAircraft(aircraft: object): Promise<any> {
     return localStorage.setItem('aircraft', JSON.stringify(aircraft));
   }
+
+  async getAircraftNumber(): Promise<any> {
+    return Number(localStorage.getItem('aircraftNumber'));
+  }
+
+  async saveAircraftNumber(number: number): Promise<any> {
+    return localStorage.setItem('aircraftNumber', number.toString());
+  }
+
 }

@@ -13,9 +13,9 @@ import { AppService } from '../services/app.service';
 
 export class navbarComponent implements OnInit {
 
-    appService = inject(AppService);
+  appService = inject(AppService);
 
-    reroute = this.appService.boolValue;
+  reroute = this.appService.boolValue;
 
   constructor() { }
 

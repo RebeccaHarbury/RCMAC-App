@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-
 @Injectable({ providedIn: 'root' })
 export class TimeService {
 
@@ -13,5 +12,4 @@ export class TimeService {
   async setTime(time: number): Promise<any> {
     return localStorage.setItem('time', time.toString());
   }
-
- }
+}

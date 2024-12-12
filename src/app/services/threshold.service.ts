@@ -4,7 +4,6 @@ import { selectPrecipThreshold, selectVisThreshold, selectWindThreshold } from '
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
 
-
 @Injectable({ providedIn: 'root' })
 export class ThresholdService {
 
@@ -12,17 +11,17 @@ export class ThresholdService {
     precipCond$ = 20;
     visCond$ = 9000;
 
-    constructor(private store: Store<AppState>) {     
+    constructor(private store: Store<AppState>) {
         this.store.dispatch(loadThresholds())
         this.store.select(selectWindThreshold).subscribe(wind => {
-          this.windCond$ = wind;
+            this.windCond$ = wind;
         })
         this.store.select(selectPrecipThreshold).subscribe(precip => {
             this.precipCond$ = precip;
         })
         this.store.select(selectVisThreshold).subscribe(vis => {
             this.visCond$ = vis;
-          })
+        })
     }
 
     async getThresholds(): Promise<any> {
@@ -52,8 +51,4 @@ export class ThresholdService {
             return false;
         }
     }
-
 }
-
-
-

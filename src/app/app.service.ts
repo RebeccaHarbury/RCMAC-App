@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { DateTime } from 'luxon';
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -8,41 +9,44 @@ import { DateTime } from 'luxon';
 export class AppService {
 
     //switch between local and remote data
-    localData = true
+    localData = true;
 
-    httpHourly = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?' //hourly data http call
-    httpDaily = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?' //daily data http call
+    httpHourly = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/hourly?'; //hourly data http call
+    httpDaily = 'https://data.hub.api.metoffice.gov.uk/sitespecific/v0/point/daily?'; //daily data http call
 
     dateToday = DateTime.local().toISODate();
-    dateTomorrow = DateTime.local().plus({days: 1}).toISODate();    
+    dateTomorrow = DateTime.local().plus({ days: 1 }).toISODate();
 
-    okehamptonData = { 
-        id: 0, 
-        name: 'Okehampton', 
-        lat: 50.7390, 
-        lon: -4.0032, 
-        hourlyData: <any>[], 
-        dailyData: <any>[] };
+    okehamptonData = {
+        id: 0,
+        name: 'Okehampton',
+        lat: 50.7390,
+        lon: -4.0032,
+        hourlyData: <any>[],
+        dailyData: <any>[]
+    };
 
-    torbayData = { 
-        id: 1, 
-        name: 'Torbay', 
-        lat: 50.4517, 
-        lon: -3.5579, 
-        hourlyData: <any>[], 
-        dailyData: <any>[] };
+    torbayData = {
+        id: 1,
+        name: 'Torbay',
+        lat: 50.4517,
+        lon: -3.5579,
+        hourlyData: <any>[],
+        dailyData: <any>[]
+    };
 
-    woodburyData = { 
-        id: 2, 
-        name: 'Woodbury', 
-        lat: 50.6768, 
-        lon: -3.4005, 
-        hourlyData: <any>[], 
-        dailyData: <any>[] };
+    woodburyData = {
+        id: 2,
+        name: 'Woodbury',
+        lat: 50.6768,
+        lon: -3.4005,
+        hourlyData: <any>[],
+        dailyData: <any>[]
+    };
 
-    windCond = 9
-    precipCond = 20
-    visCond = 9000
+    windCond = 9;
+    precipCond = 20;
+    visCond = 9000;
 
     headers;
 
@@ -55,94 +59,106 @@ export class AppService {
         //Okehampton hourly data
         if (this.localData == false) {
             this.httpClient.get(`${this.httpHourly}latitude=${this.okehamptonData.lat}&longitude=${this.okehamptonData.lon}`, { headers: this.headers }).subscribe((result: any) => {
-            let localHourlyData = result.features[0].properties.timeSeries
-            const todayOkehampton = this.filterHourly(localHourlyData, this.dateToday);
-            const tomorOkehampton = this.filterHourly(localHourlyData, this.dateTomorrow);
-            this.okehamptonData.hourlyData.splice(0, 1, todayOkehampton, tomorOkehampton);
-        })}
+                let localHourlyData = result.features[0].properties.timeSeries;
+                const todayOkehampton = this.filterHourly(localHourlyData, this.dateToday);
+                const tomorOkehampton = this.filterHourly(localHourlyData, this.dateTomorrow);
+                this.okehamptonData.hourlyData.splice(0, 1, todayOkehampton, tomorOkehampton);
+            })
+        }
         else {
             this.httpClient.get(`./hourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
-            let localHourlyData = result.features[0].properties.timeSeries
-            const todayOkehampton = this.filterHourly(localHourlyData,'2024-09-27');
-            const tomorOkehampton = this.filterHourly(localHourlyData,'2024-09-28');
-            this.okehamptonData.hourlyData.splice(0, 1, todayOkehampton, tomorOkehampton);
-        })}
+                let localHourlyData = result.features[0].properties.timeSeries;
+                const todayOkehampton = this.filterHourly(localHourlyData, '2024-09-27');
+                const tomorOkehampton = this.filterHourly(localHourlyData, '2024-09-28');
+                this.okehamptonData.hourlyData.splice(0, 1, todayOkehampton, tomorOkehampton);
+            })
+        }
 
         //Torbay hourly data
         if (this.localData == false) {
             this.httpClient.get(`${this.httpHourly}latitude=${this.torbayData.lat}&longitude=${this.torbayData.lon}`, { headers: this.headers }).subscribe((result: any) => {
-            let localHourlyData = result.features[0].properties.timeSeries
-            const todayTorbay = this.filterHourly(localHourlyData, this.dateToday);
-            const tomorTorbay = this.filterHourly(localHourlyData, this.dateTomorrow);
-            this.torbayData.hourlyData.splice(0, 1, todayTorbay, tomorTorbay);
-        })}
+                let localHourlyData = result.features[0].properties.timeSeries;
+                const todayTorbay = this.filterHourly(localHourlyData, this.dateToday);
+                const tomorTorbay = this.filterHourly(localHourlyData, this.dateTomorrow);
+                this.torbayData.hourlyData.splice(0, 1, todayTorbay, tomorTorbay);
+            })
+        }
         else {
             this.httpClient.get(`./spareHourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
-            let localHourlyData = result.features[0].properties.timeSeries
-            const todayTorbay = this.filterHourly(localHourlyData,'2024-09-27');
-            const tomorTorbay = this.filterHourly(localHourlyData,'2024-09-28');
-            this.torbayData.hourlyData.splice(0, 1, todayTorbay, tomorTorbay);
-        })}
+                let localHourlyData = result.features[0].properties.timeSeries;
+                const todayTorbay = this.filterHourly(localHourlyData, '2024-09-27');
+                const tomorTorbay = this.filterHourly(localHourlyData, '2024-09-28');
+                this.torbayData.hourlyData.splice(0, 1, todayTorbay, tomorTorbay);
+            })
+        }
 
         //Woodbury hourly data
         if (this.localData == false) {
             this.httpClient.get(`${this.httpHourly}latitude=${this.woodburyData.lat}&longitude=${this.woodburyData.lon}`, { headers: this.headers }).subscribe((result: any) => {
-            let localHourlyData = result.features[0].properties.timeSeries
-            const todayWoodbury = this.filterHourly(localHourlyData, this.dateToday);
-            const tomorWoodbury = this.filterHourly(localHourlyData, this.dateTomorrow);
-            this.woodburyData.hourlyData.splice(0, 1, todayWoodbury, tomorWoodbury);
-        })}
+                let localHourlyData = result.features[0].properties.timeSeries;
+                const todayWoodbury = this.filterHourly(localHourlyData, this.dateToday);
+                const tomorWoodbury = this.filterHourly(localHourlyData, this.dateTomorrow);
+                this.woodburyData.hourlyData.splice(0, 1, todayWoodbury, tomorWoodbury);
+            })
+        }
         else {
             this.httpClient.get(`./spareHourlyData.json`, { headers: this.headers }).subscribe((result: any) => {
-            let localHourlyData = result.features[0].properties.timeSeries
-            const todayWoodbury = this.filterHourly(localHourlyData,'2024-09-27');
-            const tomorWoodbury = this.filterHourly(localHourlyData,'2024-09-28');
-            this.woodburyData.hourlyData.splice(0, 1, todayWoodbury, tomorWoodbury);
-        })}
+                let localHourlyData = result.features[0].properties.timeSeries;
+                const todayWoodbury = this.filterHourly(localHourlyData, '2024-09-27');
+                const tomorWoodbury = this.filterHourly(localHourlyData, '2024-09-28');
+                this.woodburyData.hourlyData.splice(0, 1, todayWoodbury, tomorWoodbury);
+            })
+        }
     }
 
     loadDailyData() {
         //Okehampton daily data
         if (this.localData == false) {
             this.httpClient.get(`${this.httpDaily}latitude=${this.okehamptonData.lat}&longitude=${this.okehamptonData.lon}`, { headers: this.headers }).subscribe((result: any) => {
-            let localDailyData = result.features[0].properties.timeSeries;
-            localDailyData.splice(0, 2);
-            this.okehamptonData.dailyData.splice(0, 1, localDailyData);
-        })}
+                let localDailyData = result.features[0].properties.timeSeries;
+                localDailyData.splice(0, 2);
+                this.okehamptonData.dailyData.splice(0, 1, localDailyData);
+            })
+        }
         else {
             this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
-            let localDailyData = result.features[0].properties.timeSeries;
-            localDailyData.splice(0, 2);
-            this.okehamptonData.dailyData.splice(0, 1, localDailyData);
-        })}
+                let localDailyData = result.features[0].properties.timeSeries;
+                localDailyData.splice(0, 2);
+                this.okehamptonData.dailyData.splice(0, 1, localDailyData);
+            })
+        }
 
         //Torbay daily data
         if (this.localData == false) {
             this.httpClient.get(`${this.httpDaily}latitude=${this.torbayData.lat}&longitude=${this.torbayData.lon}`, { headers: this.headers }).subscribe((result: any) => {
-            let localDailyData = result.features[0].properties.timeSeries;
-            localDailyData.splice(0, 2);
-            this.torbayData.dailyData.splice(0, 1, localDailyData);
-        })}
+                let localDailyData = result.features[0].properties.timeSeries;
+                localDailyData.splice(0, 2);
+                this.torbayData.dailyData.splice(0, 1, localDailyData);
+            })
+        }
         else {
             this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
-            let localDailyData = result.features[0].properties.timeSeries;
-            localDailyData.splice(0, 2);
-            this.torbayData.dailyData.splice(0, 1, localDailyData);
-        })}
+                let localDailyData = result.features[0].properties.timeSeries;
+                localDailyData.splice(0, 2);
+                this.torbayData.dailyData.splice(0, 1, localDailyData);
+            })
+        }
 
         //Woodbury daily data
         if (this.localData == false) {
             this.httpClient.get(`${this.httpDaily}latitude=${this.woodburyData.lat}&longitude=${this.woodburyData.lon}`, { headers: this.headers }).subscribe((result: any) => {
-            let localDailyData = result.features[0].properties.timeSeries;
-            localDailyData.splice(0, 2);
-            this.woodburyData.dailyData.splice(0, 1, localDailyData);
-        })}
+                let localDailyData = result.features[0].properties.timeSeries;
+                localDailyData.splice(0, 2);
+                this.woodburyData.dailyData.splice(0, 1, localDailyData);
+            })
+        }
         else {
             this.httpClient.get(`./dailyData.json`, { headers: this.headers }).subscribe((result: any) => {
-            let localDailyData = result.features[0].properties.timeSeries;
-            localDailyData.splice(0, 2);
-            this.woodburyData.dailyData.splice(0, 1, localDailyData);
-        })}
+                let localDailyData = result.features[0].properties.timeSeries;
+                localDailyData.splice(0, 2);
+                this.woodburyData.dailyData.splice(0, 1, localDailyData);
+            })
+        }
     }
 
     getData(place_name: any) {
@@ -158,16 +174,35 @@ export class AppService {
         else return console.log('place name not valid');
     }
 
-    filterHourly(data:any, date:string) {
-        const filteredData = data.filter((hour:any) => hour.time.includes(date));
+    filterHourly(data: any, date: string) {
+        const filteredData = data.filter((hour: any) => hour.time.includes(date));
         return filteredData;
     }
 
-    conditionHighlight(wind:number, precip:number, vis:number) {
-    if (wind <= this.windCond && precip <= this.precipCond && vis >= this.visCond) {
-        return true;
-    } 
-    else {
-        return false;
-    }}
+    conditionHighlight(wind: number, precip: number, vis: number) {
+        if (wind <= this.windCond && precip <= this.precipCond && vis >= this.visCond) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    reroute = localStorage.getItem('rerouteToFav');
+    boolValue = (this.reroute === 'true');
+    private rerouteOn = new BehaviorSubject(this.boolValue);
+    rerouteValue = this.rerouteOn.asObservable();
+
+    sendValue(newValue: boolean) {
+        this.rerouteOn.next(newValue);
+        localStorage.setItem('rerouteToFav', newValue.toString());
+        this.reroute = localStorage.getItem('rerouteToFav');
+    }
+
+    private homeOn = new BehaviorSubject(false);
+    homeValue = this.homeOn.asObservable();
+
+    cancelReroute(bool: boolean) {
+        this.homeOn.next(bool);
+    }
 }

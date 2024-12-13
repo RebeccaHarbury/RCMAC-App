@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../app.service';
 
 @Component({
@@ -8,17 +8,13 @@ import { AppService } from '../app.service';
   standalone: true,
   templateUrl: './daily-detail-display.component.html',
   imports: [
-    RouterLink,
-    RouterOutlet,
     CommonModule,
-    DatePipe,
   ],
   styleUrl: './daily-detail-display.component.scss'
 })
 
 export class DailyDetailComponent implements OnInit {
   specificLocationData: any = [];
-
 
   service = inject(AppService);
 

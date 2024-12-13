@@ -9,7 +9,7 @@ import {
 } from './favourite.actions';
 import { of, from } from 'rxjs';
 import { switchMap, map, tap, catchError, withLatestFrom } from 'rxjs/operators';
-import {  Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { selectFavourite } from './favourite.selectors';
 import { AppState } from '../app.state';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
@@ -23,14 +23,14 @@ export class FavouriteEffects {
     private store: Store<AppState>,
     private favouriteService: FavouriteService,
     private route: Router
-  ) {}
+  ) { }
 
   loadFavourite$ = createEffect(() =>
     this.action$.pipe(
       ofType(loadFavourite),
       switchMap(() =>
         from(this.favouriteService.getFavourite()).pipe(
-          map((location:string) => loadFavouriteSuccess({ location: location })),
+          map((location: string) => loadFavouriteSuccess({ location: location })),
           catchError((error) => of(loadFavouriteFailure({ error })))
         )
       )
@@ -42,7 +42,7 @@ export class FavouriteEffects {
       ofType(routeFavourite),
       switchMap(() =>
         from(this.favouriteService.getFavourite()).pipe(
-          map((location:string) => loadFavouriteSuccess({ location: location })),
+          map((location: string) => loadFavouriteSuccess({ location: location })),
           tap((favourite) => this.route.navigate([favourite.location])),
           catchError((error) => of(loadFavouriteFailure({ error })))
         )
@@ -52,12 +52,11 @@ export class FavouriteEffects {
 
   setFavourite$ = createEffect(() =>
     this.action$.pipe(
-        ofType(addFavourite, deleteFavourite),
-        withLatestFrom(this.store.select(selectFavourite)),
-        switchMap(([actions, location]) => this.favouriteService.setFavourite(location))
-        ),
+      ofType(addFavourite, deleteFavourite),
+      withLatestFrom(this.store.select(selectFavourite)),
+      switchMap(([actions, location]) => this.favouriteService.setFavourite(location))
+    ),
     { dispatch: false }
   );
-
 }
 

@@ -19,7 +19,7 @@
 
   .cards {
     display: flex;
-    padding: 20px;
+    padding: 0px 20px;
     margin: auto;
     max-width: 65%;
 
@@ -60,15 +60,23 @@
       margin: 25px;
       border-radius: 20px;
       padding: 20px;
-      text-align: center;
       display: grid;
       grid-row: repeat(7, auto);
       place-items: center;
       align-self: center;
       max-width: 40%;
 
+      .time {
+        font-size: large;
+        font-weight: lighter;
+        margin-top: 0px;
+        margin-bottom: 5px;
+      }
+
       .place {
         font-size: xx-large;
+        margin-top: 0px;
+        margin-bottom: 10px;
       }
 
       .weatherIcon {
@@ -79,7 +87,7 @@
       p {
         font-size: x-large;
         display: inline-flex;
-        margin-bottom: 15px;
+        margin-top: 15px;
 
         img {
           height: 32px;
@@ -100,7 +108,6 @@
       margin: 25px;
       border-radius: 20px;
       padding: 20px;
-      text-align: center;
       display: grid;
       grid-row: repeat(7, auto);
       place-items: center;
@@ -110,4 +117,35 @@
 
   a {
     text-decoration: none;
+  }
+
+  .currentButton {
+    display: block;
+    justify-self: center;
+
+    :hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+  }
+
+  .current {
+    margin: auto;
+    display: flex;
+    place-items: center;
+    border-radius: 20px;
+    border-width: 1px;
+    padding: 0px 15px;
+    background-color: rgba(18, 59, 97, 0.24);
+    color: rgb(14, 52, 87);
+    font-size: medium;
+
+    :hover {
+      box-shadow: none;
+    }
+
+    img {
+      padding-left: 5px;
+      height: 25px;
+    }
   }

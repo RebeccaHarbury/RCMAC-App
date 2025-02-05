@@ -1,13 +1,16 @@
 import { Injectable } from "@angular/core";
-import { selectNumberAircraft, selectSavedAircraft } from "./aircraft.selectors";
+import { selectNumberAircraft, selectSavedAircraft, selectSelectedAircraft } from "./aircraft.selectors";
 import { 
     addAircraft, 
+    changeSelectedAircraft, 
     loadAircraft, 
     loadAircraftFailure, 
     loadAircraftNumber, 
     loadAircraftNumberFailure, 
     loadAircraftNumberSuccess, 
     loadAircraftSuccess, 
+    loadSelectedAircraft, 
+    loadSelectedAircraftSuccess, 
     removeAircraft
  } from "./aircraft.actions";
 import { AircraftService } from "../../services/aircraft.service";
@@ -47,6 +50,17 @@ export class AircraftEffects {
             ),
         ));
 
+    loadSelectedAircraft$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(loadSelectedAircraft),
+            switchMap(() =>
+                from(this.aircraftService.getSelectedAircraft()).pipe(
+                    map((selected) => loadSelectedAircraftSuccess({ selected: selected })),
+                    catchError((error) => of(loadAircraftFailure({ error })))
+                )
+            ),
+        ));
+
     saveAircraft$ = createEffect(
         () =>
             this.actions$.pipe(
@@ -58,4 +72,16 @@ export class AircraftEffects {
             ),
         { dispatch: false }
     );
+
+    saveSelectedAircraft$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(changeSelectedAircraft),
+                withLatestFrom(this.store.select(selectSelectedAircraft)),
+                switchMap(([action, selected]) => from(this.aircraftService.saveSelectedAircraft(selected))),
+            ),
+        { dispatch: false }
+    );
+
+
 }

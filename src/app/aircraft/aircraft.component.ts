@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
-import { addAircraft, incrementId, loadAircraft, loadAircraftNumber, removeAircraft } from '../state/aircraft/aircraft.actions';
-import { selectNumberAircraft, selectSavedAircraft } from '../state/aircraft/aircraft.selectors';
+import { addAircraft, changeSelectedAircraft, incrementId, loadAircraft, loadAircraftNumber, removeAircraft } from '../state/aircraft/aircraft.actions';
+import { selectNumberAircraft, selectSavedAircraft, selectSelectedAircraft } from '../state/aircraft/aircraft.selectors';
 
 
 @Component({
@@ -20,8 +20,6 @@ export class AircraftComponent implements OnInit {
     newOpen = false;
     editOpen = false;
     deleteOpen = false;
-
-
     savedAircraft: any[] = new Array;
     selected_aircraft = "Plane 1";
     selected_icon = 1;
@@ -37,6 +35,9 @@ export class AircraftComponent implements OnInit {
         })
         this.store.select(selectNumberAircraft).subscribe(aircraftNumber => {
             this.aircraft_id = aircraftNumber;
+        })
+        this.store.select(selectSelectedAircraft).subscribe(aircraft => {
+            this.selected_aircraft = aircraft;
         })
 
     }
@@ -112,7 +113,11 @@ export class AircraftComponent implements OnInit {
         this.store.dispatch(addAircraft({ details }));
     }
 
-    deleteAircraft(id: number) {
+    deleteAircraft(id: number, name: string) {
+        if (name === this.selected_aircraft) {
+            const selected = 'None'
+            this.store.dispatch(changeSelectedAircraft({ selected }))
+        }
         this.store.dispatch(removeAircraft({ id }));
         this.deleteOpen = false;
         this.editOpen = false;

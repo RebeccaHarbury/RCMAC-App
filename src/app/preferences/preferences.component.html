@@ -41,7 +41,7 @@
 
     <div class="pref">Weather Thresholds
         <div class="content" id="thresholds">
-            <form (change)="onChangeThresholds(wind.value, precip.value, vis.value)">
+            <form (change)="removeSelectedAircraft('None'); onChangeThresholds(wind.value, precip.value, vis.value)">
                 <a [ngClass]="{prefItem : isPrefThresholds(9, 20, 9000)}" (click)="onChangeThresholds(9, 20, 9000)">Default</a>
                 <label for="wind">Wind speed:</label>
                 <input #wind type="number" id="wind" name="wind" min="0" [value]="[pref_wind$]">mph
@@ -50,6 +50,19 @@
                 <label for="vis">Visibility:</label>
                 <input #vis type="number" id="vis" name="vis" min="0" [value]="[pref_vis$]">m
             </form>
+        </div>
+    </div>
+
+    <div class="pref">Aircraft
+        <div class="content" id="aircraft">
+            <a [ngClass]="{prefItem : isSelectedAircraft('None')}" (click)="removeSelectedAircraft('None')">None</a>
+            <ng-container *ngFor="let aircraft of savedAircraft; let i=index;">
+                <a class="aircraftInfo" [ngClass]="{prefItem : (isSelectedAircraft(savedAircraft[i].name))}" style="border-color: {{savedAircraft[i].backgroundColour}};" (click)="onSelectAircraft(savedAircraft[i])">
+                <p class="aircraftName">{{savedAircraft[i].name}}</p>
+                <p class="weatherInfo">{{savedAircraft[i].wind}}mph</p>
+                <p class="weatherInfo">{{savedAircraft[i].precip}}%</p>
+                <p class="weatherInfo">{{savedAircraft[i].vis}}m</p></a>
+            </ng-container>
         </div>
     </div>
 

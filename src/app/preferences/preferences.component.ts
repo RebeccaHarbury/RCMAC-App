@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { AppState } from '../state/app.state';
@@ -8,6 +8,8 @@ import { addFavourite, loadFavourite } from '../state/favourite/favourite.action
 import { selectFavourite } from '../state/favourite/favourite.selectors';
 import { selectPrecipThreshold, selectVisThreshold, selectWindThreshold } from '../state/thresholds/thresholds.selectors';
 import { changeThresholdPrecip, changeThresholdVis, changeThresholdWind, loadThresholds } from '../state/thresholds/thresholds.actions';
+import { changeSelectedAircraft, loadAircraft, loadSelectedAircraft } from '../state/aircraft/aircraft.actions';
+import { selectSavedAircraft, selectSelectedAircraft } from '../state/aircraft/aircraft.selectors';
 
 @Component({
   selector: 'preferences-component',
@@ -27,6 +29,8 @@ export class PreferencesComponent implements OnInit {
   pref_wind$ = 9;
   pref_precip$ = 20;
   pref_vis$ = 9000;
+  savedAircraft: any[] = new Array;
+  selected_aircraft = 'None';
 
 
   constructor(private store: Store<AppState>
@@ -36,12 +40,12 @@ export class PreferencesComponent implements OnInit {
       this.fav_location$ = favourite;
     })
 
-    this.store.dispatch(loadTime())
+    this.store.dispatch(loadTime());
     this.store.select(selectTime).subscribe(time => {
       this.pref_time$ = time;
     })
 
-    this.store.dispatch(loadThresholds())
+    this.store.dispatch(loadThresholds());
     this.store.select(selectWindThreshold).subscribe(wind => {
       this.pref_wind$ = wind;
     })
@@ -50,6 +54,15 @@ export class PreferencesComponent implements OnInit {
     })
     this.store.select(selectVisThreshold).subscribe(vis => {
       this.pref_vis$ = vis;
+    })
+
+    this.store.dispatch(loadAircraft());
+    this.store.select(selectSavedAircraft).subscribe(aircraft => {
+      this.savedAircraft = aircraft;
+    })
+    this.store.dispatch(loadSelectedAircraft());
+    this.store.select(selectSelectedAircraft).subscribe(name => {
+      this.selected_aircraft = name;
     })
   }
 
@@ -90,6 +103,24 @@ export class PreferencesComponent implements OnInit {
       return true;
     }
     else {
+      return false;
+    }
+  }
+
+  onSelectAircraft(aircraft: any) {
+    const selected: string = aircraft.name
+    this.store.dispatch(changeSelectedAircraft({ selected }))
+    this.onChangeThresholds(aircraft.wind, aircraft.precip, aircraft.vis)
+  }
+
+  removeSelectedAircraft(selected: string) {
+    this.store.dispatch(changeSelectedAircraft({ selected }))
+  }
+
+  isSelectedAircraft(name: string) {
+    if (name === this.selected_aircraft) {
+      return true;
+    } else {
       return false;
     }
   }

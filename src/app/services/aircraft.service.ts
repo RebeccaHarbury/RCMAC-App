@@ -23,4 +23,12 @@ export class AircraftService {
     return localStorage.setItem('aircraftNumber', number.toString());
   }
 
+  async getSelectedAircraft(): Promise<any> {
+    return localStorage.getItem('selectedAircraft')!;;
+  }
+
+  async saveSelectedAircraft(selected: string): Promise<any> {
+    return localStorage.setItem('selectedAircraft', selected);
+  }
+
 }

@@ -28,6 +28,15 @@ export class navbarComponent implements OnInit {
     this.appService.rerouteBool(this.reroute);
   }
 
+  buttonText() {
+    if (this.reroute === true) {
+      return 'Displaying favourite on load';
+    }
+    else {
+      return 'Displaying home on load';
+    }
+  }
+
   ngOnInit() {
   }
 }

@@ -5,7 +5,7 @@
 </button>
 
 <ng-container *ngFor="let aircraft of savedAircraft; let i=index;">
-    <a [ngClass]="{aircraftSelected : savedAircraft[i].name === selected_aircraft}" class="aircraftInfo" (click)="editForm(true, i)">
+    <a class="aircraftInfo" (click)="editForm(true, i)">
         <p class="aircraftName" style="background-color: {{savedAircraft[i].backgroundColour}};color:{{savedAircraft[i].textColour}}"> {{savedAircraft[i].name}} </p>
         <span><img src="images/plane{{savedAircraft[i].icon}}.png" alt="aircraft icon" class="iconImg"/></span>
         <p><img class="weatherIcon" src="images/weather-33.png" alt="windy icon" />{{savedAircraft[i].wind}}mph</p>
@@ -109,11 +109,14 @@
   <form class="delete-form-container">
     <h2>Delete Aircraft?</h2>
 
-    <p id="name" required>Are you sure you want to delete {{savedAircraft[current_index].name}}?
+    <p>
+      Are you sure you want to delete {{savedAircraft[current_index].name}}?
+    </p>
+    <p id="warn">
       This action cannot be undone.
     </p>
 
-    <button type="button" class="btn delete" (click)="deleteAircraft(savedAircraft[current_index].id)">Delete</button>
+    <button type="button" class="btn delete" (click)="deleteAircraft(savedAircraft[current_index].id, savedAircraft[current_index].name)">Delete</button>
     <button type="button" class="btn cancel" (click)="deleteForm(false)">Cancel</button>
   </form>
 </div>

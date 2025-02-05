@@ -12,7 +12,7 @@
     <a class="navAircraft" [routerLink]="['Aircraft']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >Aircraft</a>
 
     <button [ngClass]="{checked: reroute === true}" class="toggleButton" (click)="onSwitch();">
-       Load on favourite <img src="images/star-filled.png" alt="favourite icon">
+       {{buttonText()}} <img src="images/star-filled.png" alt="favourite icon">
     </button>
 
 </div>

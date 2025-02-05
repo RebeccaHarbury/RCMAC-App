@@ -1,15 +1,19 @@
-h1 {
+.titleBar {
   display: grid;
-  grid-template-columns:auto auto;
+  grid-template-columns: 75% 25%;
+  background: linear-gradient(rgb(28, 77, 122), rgb(18, 59, 97));
+}
+h1 {
+  display: block;
+  align-content: center;
   padding-left: 70px;
+  width: 100%;
   height: 70px;
   color: #ffffff;
   font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
-  font-size: 250%;
-  background: linear-gradient(rgb(28, 77, 122), rgb(18, 59, 97));
-  align-items: center;
-  text-overflow: hidden;
-  text-wrap: nowrap;
+  font-size: 200%;
+  overflow: hidden;
+  white-space: nowrap;
 
   img {
     position: absolute;
@@ -19,17 +23,31 @@ h1 {
     place-self: center;
   }
 }
+.preferences {
+  position: relative;
+  color: #ffffff;
+  direction: rtl;
+  justify-self: end;
+  align-self: center;
+  padding-right: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  
+  img {
+    filter: invert(1);
+    vertical-align: text-top;
+    height: 20px;
+  }
+  .hidden {
+    display: none;
+  }
+  
+}
 
 h1:hover {
   cursor: pointer;
-}
-
-.thresholds {
-  font-size: medium;
-  font-weight: lighter;
-  display: flex;
-  justify-self: end;
-  margin: 10px;
 }
 
 h2 {
@@ -48,4 +66,8 @@ h3 {
 
 * {
   font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+}
+
+@media only screen and (max-width:950px) {
+  
 }

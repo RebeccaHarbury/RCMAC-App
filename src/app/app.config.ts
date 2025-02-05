@@ -8,6 +8,9 @@ import { favouriteReducer } from './state/favourite/favourite.reducer';
 import { TimeReducer } from './state/time/time.reducer';
 import { thresholdReducer } from './state/thresholds/thresholds.reducer';
 import { aircraftReducer } from './state/aircraft/aircraft.reducers';
+import { provideEffects } from '@ngrx/effects';
+import { AircraftEffects } from './state/aircraft/aircraft.effects';
+import { ThresholdEffects } from './state/thresholds/thresholds.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +22,8 @@ export const appConfig: ApplicationConfig = {
     provideState({ name: 'favouriteLocation', reducer: favouriteReducer }),
     provideState({ name: 'timePreference', reducer: TimeReducer }),
     provideState({ name: 'weatherThresholds', reducer: thresholdReducer}),
-    provideState({ name: 'aircraftInfo', reducer: aircraftReducer})
+    provideState({ name: 'aircraftInfo', reducer: aircraftReducer}),
+    provideEffects(AircraftEffects, ThresholdEffects)
+
   ]
 };

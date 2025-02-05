@@ -3,10 +3,12 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppService } from './services/app.service';
 import { navbarComponent } from "./nav-bar/nav-bar.component";
-import { loadThresholds } from './state/thresholds/thresholds.actions';
-import { selectPrecipThreshold, selectVisThreshold, selectWindThreshold } from './state/thresholds/thresholds.selectors';
-import { AppState } from './state/app.state';
 import { Store } from '@ngrx/store';
+import { loadSelectedAircraft } from './state/aircraft/aircraft.actions';
+import { selectSelectedAircraft } from './state/aircraft/aircraft.selectors';
+import { AppState } from './state/app.state';
+import { loadThresholds } from './state/thresholds/thresholds.actions';
+import { selectWindThreshold, selectPrecipThreshold, selectVisThreshold } from './state/thresholds/thresholds.selectors';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +20,19 @@ import { Store } from '@ngrx/store';
 
 export class AppComponent implements OnInit {
   title = 'Devon RC Model Aircraft Club';
-  pref_wind$ = 9;
-  pref_precip$ = 20;
-  pref_vis$ = 9000;
 
   service = inject(AppService);
 
-  constructor(private store: Store<AppState>) {
-    this.store.dispatch(loadThresholds())
+  pref_wind$ = 9;
+  pref_precip$ = 20;
+  pref_vis$ = 9000;
+  selected_aircraft = 'None';
+
+
+  constructor(private store: Store<AppState>
+  ) {
+
+    this.store.dispatch(loadThresholds());
     this.store.select(selectWindThreshold).subscribe(wind => {
       this.pref_wind$ = wind;
     })
@@ -35,7 +42,12 @@ export class AppComponent implements OnInit {
     this.store.select(selectVisThreshold).subscribe(vis => {
       this.pref_vis$ = vis;
     })
-   }
+
+    this.store.dispatch(loadSelectedAircraft());
+    this.store.select(selectSelectedAircraft).subscribe(name => {
+      this.selected_aircraft = name;
+    })
+  }
 
   home() {
     this.service.cancelReroute(true);
@@ -44,6 +56,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.service.loadHourlyData();
     this.service.loadDailyData();
+    
     console.log('app component on init');
   }
 }

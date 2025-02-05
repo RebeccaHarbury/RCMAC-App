@@ -28,7 +28,7 @@ export const AppRoutes: Route[] = [
   },
   {
     path: 'Preferences',
-    providers: [provideEffects(ThresholdEffects)],
+    providers: [provideEffects(ThresholdEffects), provideEffects(AircraftEffects)],
     title: 'Preferences',
     component: PreferencesComponent,
     pathMatch: 'full'

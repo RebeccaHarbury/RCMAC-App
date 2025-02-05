@@ -3,7 +3,7 @@ import {
   setTime,
   loadTime,
   loadTimeSuccess,
-  loadTimeFailure
+  loadTimeFailure,
 } from './time.actions';
 import { of, from } from 'rxjs';
 import { switchMap, map, catchError, withLatestFrom } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { Store } from '@ngrx/store';
 import { selectTime } from './time.selectors';
 import { AppState } from '../app.state';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
-import { TimeService } from '../../weather-display/time.service';
+import { TimeService } from '../../services/time.service';
 
 @Injectable()
 export class TimeEffects {
@@ -43,4 +43,3 @@ export class TimeEffects {
   );
 
 }
-

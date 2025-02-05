@@ -1,0 +1,56 @@
+<div class="sections">
+    <div class="pref">Location
+        <div class="content" id="location">
+            <a [ngClass]="{prefItem : isPrefLocation('')}" (click)="onSetLocation('')">None</a>
+            <a [ngClass]="{prefItem : isPrefLocation('Okehampton')}" (click)="onSetLocation('Okehampton')">Okehampton</a>
+            <a [ngClass]="{prefItem : isPrefLocation('Torbay')}" (click)="onSetLocation('Torbay')">Torbay</a>
+            <a [ngClass]="{prefItem : isPrefLocation('Woodbury')}" (click)="onSetLocation('Woodbury')">Woodbury</a>
+        </div>
+    </div>
+
+    <div class="pref">Time
+        <div class="content" id="time">
+            <a [ngClass]="{prefItem : isPrefTime(17)}" (click)="onSetTime(17)">Default</a>
+            <a [ngClass]="{prefItem : isPrefTime(0)}" (click)="onSetTime(0)">00:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(1)}" (click)="onSetTime(1)">01:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(2)}" (click)="onSetTime(2)">02:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(3)}" (click)="onSetTime(3)">03:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(4)}" (click)="onSetTime(4)">04:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(5)}" (click)="onSetTime(5)">05:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(6)}" (click)="onSetTime(6)">06:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(7)}" (click)="onSetTime(7)">07:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(8)}" (click)="onSetTime(8)">08:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(9)}" (click)="onSetTime(9)">09:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(10)}" (click)="onSetTime(10)">10:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(11)}" (click)="onSetTime(11)">11:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(12)}" (click)="onSetTime(12)">12:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(13)}" (click)="onSetTime(13)">13:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(14)}" (click)="onSetTime(14)">14:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(15)}" (click)="onSetTime(15)">15:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(16)}" (click)="onSetTime(16)">16:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(17)}" (click)="onSetTime(17)">17:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(18)}" (click)="onSetTime(18)">18:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(19)}" (click)="onSetTime(19)">19:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(20)}" (click)="onSetTime(20)">20:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(21)}" (click)="onSetTime(21)">21:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(22)}" (click)="onSetTime(22)">22:00</a>
+            <a [ngClass]="{prefItem : isPrefTime(23)}" (click)="onSetTime(23)">23:00</a>
+        </div>
+    </div>
+
+
+    <div class="pref">Weather Thresholds
+        <div class="content" id="thresholds">
+            <form (change)="onChangeThresholds()">
+                <a [ngClass]="{prefItem : isPrefThresholds(9, 20, 9000)}" (click)="onSetThresholds(9, 20, 9000)">Default</a>
+                <label for="wind">Wind speed:</label>
+                <input type="number" id="wind" name="wind" min="0" value="{{ pref_wind$ }}">mph
+                <label for="precip">Precipitation chance:</label>
+                <input type="number" id="precip" name="precip" min="0" max="100" [value]="[pref_precip$]">%
+                <label for="vis">Visibility:</label>
+                <input type="number" id="vis" name="vis" min="0" [value]="[pref_vis$]">m
+            </form>
+        </div>
+    </div>
+
+</div>

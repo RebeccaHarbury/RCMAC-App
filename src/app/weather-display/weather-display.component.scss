@@ -47,8 +47,6 @@
       cursor: pointer;
     }
 
-
-
     .card {
       background: linear-gradient(135deg, rgb(131, 166, 199), rgb(36, 53, 70));
       outline: solid rgb(50, 58, 70);
@@ -134,10 +132,11 @@
     display: flex;
     place-items: center;
     border-radius: 20px;
-    border-width: 1px;
+    border-width: 2px;
     padding: 0px 15px;
     background-color: rgba(18, 59, 97, 0.24);
-    color: rgb(14, 52, 87);
+    color: rgb(18, 59, 97);
+    border-color: rgb(18, 59, 97);
     font-size: medium;
 
     :hover {

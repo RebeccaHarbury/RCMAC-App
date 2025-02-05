@@ -1,11 +1,6 @@
-<h1 [routerLink]="['']" (click)="home();"><img src='RCMACfavicon.ico'/> {{title}} </h1>
-<h2>
-    <div class="navBar">This will be the navigation bar...maybe
-        <button (click)="onSetTime(19)">testing time</button> <!--Time setting will be done on a further branch-->
-        <button [ngClass]="{checked: reroute === true}" class="toggleButton" (click)="onSwitch();">
-           Load on favourite <img src="images/star-filled.png" alt="favourite icon">
-        </button></div>
-</h2>
+<h1 [routerLink]="['']" (click)="home();"><img src='RCMACfavicon.ico'/> {{title}} <span class="thresholds">W: {{pref_wind$}}mph P: {{pref_precip$}}% V: {{pref_vis$}}m</span></h1>
+<nav-bar></nav-bar>
+
 <body>
     <router-outlet></router-outlet>
 </body>

@@ -1,0 +1,19 @@
+<div class="navbar">
+    <a class="navHome" [routerLink]="['']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" (click)="home()">Home</a>
+    <a class="navLocations">
+      <button class="dropbtn">Locations
+      </button>
+      <div class="dropdown-content">
+        <a href="/Okehampton">Okehampton</a>
+        <a href="/Torbay">Torbay</a>
+        <a href="/Woodbury">Woodbury</a>
+      </div></a>
+    <a class="navPreferences" [routerLink]="['Preferences']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >Preferences</a>
+    <a class="navButton" [routerLink]="['Aircraft']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >Aircraft</a>
+
+    <button [ngClass]="{checked: reroute === true}" class="toggleButton" (click)="onSwitch();">
+       Load on favourite <img src="images/star-filled.png" alt="favourite icon">
+    </button>
+
+</div>
+

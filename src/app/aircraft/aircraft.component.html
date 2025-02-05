@@ -1,0 +1,61 @@
+<div class="aircraft">
+<button class="open-button" (click)="openForm(true)">
+    <img class="iconImg" src="images/plus.png" alt="plus sign">
+    <p class="aircraftName">New Aircraft</p>
+</button>
+
+<ng-container *ngFor="let aircraft of savedAircraft; let i=index;">
+    <div [ngClass]="{aircraftSelected : savedAircraft[i].name === selected_aircraft}" class="aircraftInfo">
+        <p class="aircraftName" style="background-color: {{savedAircraft[i].backgroundColour}};color:{{savedAircraft[i].textColour}}"> {{savedAircraft[i].name}} </p>
+        <span><img src="images/plane{{savedAircraft[i].icon}}.png" alt="aircraft icon" class="iconImg"/></span>
+        <p><img class="weatherIcon" src="images/weather-33.png" alt="windy icon" />{{savedAircraft[i].wind}}mph</p>
+        <p><img class="weatherIcon" src="images/weather-32.png" alt="precipitation percentage icon"/>{{savedAircraft[i].precip}}&percnt;</p>
+        <p><img class="weatherIcon" src="images/weather-6.png" alt="foggy icon"/>{{savedAircraft[i].vis}}m</p>
+    </div>
+</ng-container>
+
+<div [ngClass]="{'form-popup-true' : open }" class="form-popup" id="myForm">
+  <form class="form-container" (submit)="newAircraft(name.value, icon.value, textColour.value, backgroundColour.value, wind.value, precip.value, vis.value)">
+    <h2>New Aircraft</h2>
+
+    <label for="name"><b>Name</b></label>
+    <input #name id="name" type="text" placeholder="Name" name="name" required>
+
+    <label for="icon"><img src="images/plane{{selected_icon}}.png" alt="icon{{selected_icon}}" class="iconImgSmall"><b>Icon</b></label>
+    <select #icon id="icon" name="icon" (change)="onSelected(icon.value)" required>
+      <option selected value="1">1
+      <option value="2">2
+      <option value="3">3
+      <option value="4">4
+      <option value="5">5
+      <option value="6">6
+      <option value="7">7
+      <option value="8">8
+      <option value="9">9
+      <option value="10">10
+      <option value="11">11
+      <option value="12">12
+      <option value="13">13
+      <option value="14">14
+      </select>
+
+    <label for="textColour"><b>Text Colour</b></label>
+    <input #textColour id="textColour" type="color" name="textColour" value="#123B61">
+
+    <label for="backgroundColour"><b>Background Colour</b></label>
+    <input #backgroundColour id="backgroundColour" type="color" name="backgroundColour" value="#B9CEE2">
+
+    <label for="wind"><b>Wind Speed</b></label>
+    <input #wind id="wind" type="number" placeholder="9" name="wind" required> mph
+    
+    <label for="precip"><b>Precipitation Chance</b></label>
+    <input #precip id="precip" type="number" placeholder="20" name="precip" required> %
+
+    <label for="vis"><b>Visible distance</b></label>
+    <input #vis id="vis" type="number" placeholder="9000" name="vis" required> m
+
+    <button type="submit" class="btn">Save</button>
+    <button type="button" class="btn cancel" (click)="openForm(false)">Cancel</button>
+  </form>
+</div>
+</div>

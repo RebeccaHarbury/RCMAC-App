@@ -9,7 +9,7 @@
         <a href="/Woodbury">Woodbury</a>
       </div></a>
     <a class="navPreferences" [routerLink]="['Preferences']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >Preferences</a>
-    <a class="navButton" [routerLink]="['Aircraft']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >Aircraft</a>
+    <a class="navAircraft" [routerLink]="['Aircraft']" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >Aircraft</a>
 
     <button [ngClass]="{checked: reroute === true}" class="toggleButton" (click)="onSwitch();">
        Load on favourite <img src="images/star-filled.png" alt="favourite icon">

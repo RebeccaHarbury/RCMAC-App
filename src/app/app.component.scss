@@ -1,15 +1,21 @@
 h1 {
   display: grid;
-  grid-template-columns: 6% auto auto;
+  grid-template-columns:auto auto;
+  padding-left: 70px;
+  height: 70px;
   color: #ffffff;
   font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
   font-size: 250%;
   background: linear-gradient(rgb(28, 77, 122), rgb(18, 59, 97));
   align-items: center;
+  text-overflow: hidden;
+  text-wrap: nowrap;
 
   img {
+    position: absolute;
+    top: 10px;
+    left: 10px;
     height: 50px;
-    margin: 10px 10px;
     place-self: center;
   }
 }

@@ -6,6 +6,8 @@ import { provideEffects } from '@ngrx/effects';
 import { FavouriteEffects } from './state/favourite/favourite.effects';
 import { TimeEffects } from './state/time/time.effects';
 import { ThresholdEffects } from './state/thresholds/thresholds.effects';
+import { AircraftComponent } from './aircraft/aircraft.component';
+import { AircraftEffects } from './state/aircraft/aircraft.effects';
 
 export const AppRoutes: Route[] = [
   {
@@ -15,8 +17,14 @@ export const AppRoutes: Route[] = [
     component: WeatherDisplayComponent
   },
   {
-    path: 'home',
+    path: 'Home',
     redirectTo: ''
+  },
+  {
+    path: 'Aircraft',
+    providers: [provideEffects(AircraftEffects)],
+    title: 'Aircraft',
+    component: AircraftComponent,
   },
   {
     path: 'Preferences',
@@ -35,4 +43,5 @@ export const AppRoutes: Route[] = [
     path: '**',
     redirectTo: ''
   },
+
 ];

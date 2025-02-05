@@ -1,5 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
-import { loadThresholds, loadThresholdsSuccess, loadThresholdsFailure, changeThresholdWind, changeThresholdPrecip, changeThresholdVis } from "./thresholds.actions";
+import { 
+  loadThresholds, 
+  loadThresholdsSuccess, 
+  loadThresholdsFailure, 
+  changeThresholdWind, 
+  changeThresholdPrecip, 
+  changeThresholdVis 
+} from "./thresholds.actions";
 
 export interface Thresholds {
   wind: number;

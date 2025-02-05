@@ -41,14 +41,14 @@
 
     <div class="pref">Weather Thresholds
         <div class="content" id="thresholds">
-            <form (change)="onChangeThresholds()">
-                <a [ngClass]="{prefItem : isPrefThresholds(9, 20, 9000)}" (click)="onSetThresholds(9, 20, 9000)">Default</a>
+            <form (change)="onChangeThresholds(wind.value, precip.value, vis.value)">
+                <a [ngClass]="{prefItem : isPrefThresholds(9, 20, 9000)}" (click)="onChangeThresholds(9, 20, 9000)">Default</a>
                 <label for="wind">Wind speed:</label>
-                <input type="number" id="wind" name="wind" min="0" value="{{ pref_wind$ }}">mph
+                <input #wind type="number" id="wind" name="wind" min="0" [value]="[pref_wind$]">mph
                 <label for="precip">Precipitation chance:</label>
-                <input type="number" id="precip" name="precip" min="0" max="100" [value]="[pref_precip$]">%
+                <input #precip type="number" id="precip" name="precip" min="0" max="100" [value]="[pref_precip$]">%
                 <label for="vis">Visibility:</label>
-                <input type="number" id="vis" name="vis" min="0" [value]="[pref_vis$]">m
+                <input #vis type="number" id="vis" name="vis" min="0" [value]="[pref_vis$]">m
             </form>
         </div>
     </div>

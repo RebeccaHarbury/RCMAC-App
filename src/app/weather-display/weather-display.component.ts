@@ -37,7 +37,7 @@ export class WeatherDisplayComponent implements OnInit {
   appService = inject(AppService);
   thresholdService = inject(ThresholdService);
 
-  
+
 
   constructor(private store: Store<AppState>) {
     this.appService.rerouteValue.subscribe((value) => this.reroute = value.valueOf());

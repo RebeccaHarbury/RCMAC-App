@@ -4,14 +4,17 @@
     padding: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    .iconImg{
+
+    .iconImg {
         width: 100px;
     }
+
     .weatherIcon {
         width: 32px;
         margin: 5px 5px 5px 0px;
         border-radius: 20px;
     }
+
     .aircraftName {
         font-size: x-large;
         margin: 0px 5px 10px 5px;
@@ -25,7 +28,7 @@
     display: block;
     border: none;
     justify-content: center;
-    width:200px;
+    width: 200px;
     background-color: rgb(185, 206, 226);
     color: rgb(18, 59, 97);
     margin: 20px;
@@ -50,6 +53,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     cursor: pointer;
+
     p {
         display: inline-flex;
         place-items: center;
@@ -73,7 +77,15 @@
     z-index: 9;
 }
 
-.form-popup-true {
+.delete-popup {
+    display: none;
+    position: absolute;
+    border-radius: 20px;
+    z-index: 10;
+}
+
+.form-popup-true,
+.delete-popup-true {
     display: block;
 }
 
@@ -82,6 +94,14 @@
     padding: 10px;
     background-color: white;
     border: 3px solid #f1f1f1;
+    border-radius: inherit;
+}
+
+.delete-form-container {
+    max-width: 300px;
+    padding: 10px;
+    background-color: white;
+    border: 3px solid rgb(219, 75, 75);
     border-radius: inherit;
 }
 
@@ -127,7 +147,8 @@
     outline: none;
 }
 
-.form-container .btn {
+.form-container .btn,
+.delete-form-container .btn {
     background-color: #216891;
     color: white;
     padding: 16px 20px;
@@ -139,11 +160,18 @@
     opacity: 0.8;
 }
 
-.form-container .cancel {
+.form-container .delete,
+.delete-form-container .delete {
+    background-color: rgb(219, 75, 75);
+}
+
+.form-container .cancel,
+.delete-form-container .cancel {
     background-color: rgb(99, 99, 99);
 }
 
 .form-container .btn:hover,
+.delete-form-container .btn:hover,
 .open-button:hover {
     opacity: 1;
 }

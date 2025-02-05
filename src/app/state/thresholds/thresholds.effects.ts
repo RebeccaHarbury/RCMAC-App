@@ -28,7 +28,7 @@ export class ThresholdEffects {
       ofType(loadThresholds),
       switchMap(() =>
         from(this.thresholdService.getThresholds()).pipe(
-          map(( {wind, precip, vis} ) => loadThresholdsSuccess({  wind: wind, precip: precip, vis: vis  })),
+          map(({ wind, precip, vis }) => loadThresholdsSuccess({ wind: wind, precip: precip, vis: vis })),
           catchError((error) => of(loadThresholdsFailure({ error })))
         )
       )

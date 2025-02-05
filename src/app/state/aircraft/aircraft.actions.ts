@@ -1,4 +1,4 @@
-import { createAction, props } from "@ngrx/store";
+import { createAction, emptyProps, props } from "@ngrx/store";
 import { AircraftInfo } from "./aircraft.reducers";
 
 export const loadAircraft = createAction(
@@ -15,14 +15,33 @@ export const loadAircraftFailure = createAction(
     props<{ error: string }>()
 );
 
+export const loadAircraftNumber = createAction(
+    '[Aircraft] Load Aircraft Number'
+);
+
+export const loadAircraftNumberSuccess = createAction(
+    '[Aircraft] Aircraft Number Load Success',
+    props<{ aircraftNumber: number }>()
+);
+
+export const loadAircraftNumberFailure = createAction(
+    '[Aircraft] Aircraft Number Load Failure',
+    props<{ error: string }>()
+);
+
 export const addAircraft = createAction(
     '[Aircraft] Add Aircraft',
     props<{ details: AircraftInfo }>()
 );
 
+export const incrementId = createAction(
+    '[Aircraft] Increment Id',
+    emptyProps
+)
+
 export const removeAircraft = createAction(
     '[Aircraft] Remove Aircraft',
-    props<{ name: string }>()
+    props<{ id: number }>()
 );
 
 export const loadSelectedAircraft = createAction(

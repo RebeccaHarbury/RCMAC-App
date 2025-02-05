@@ -5,20 +5,18 @@
     width: 100vw;
     justify-self: center;
     padding: 50px;
-    
 }
 
 .pref {
     margin: 10px;
     padding: 20px;
-    background-color:rgb(185, 206, 226);
+    background-color: rgb(185, 206, 226);
     color: rgb(18, 59, 97);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     border-radius: 20px;
     font-size: x-large;
     max-width: 90vw;
     height: fit-content;
-    
 }
 
 .content {
@@ -37,7 +35,6 @@
     margin: 5px;
     flex-wrap: wrap;
 }
-
 
 .content a:hover {
     background-color: #ddd;
@@ -77,10 +74,10 @@ input {
 
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
 }
 
 #vis {
